@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/scss/spacing";
+@import "assets/scss/display";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.w {
+  &__100per {
+    width: 100%;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
