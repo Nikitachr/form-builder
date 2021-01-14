@@ -6,4 +6,8 @@ export interface ComponentStyles {
   fontSize: number;
   fontWeight: number;
   color: string;
+  bgColor: string;
+  borderRadius: number;
+  borderWidth: number;
+  borderColor: string;
 }
