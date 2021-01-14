@@ -1,18 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { StylesSectionComponent } from './styles-section/styles-section.component';
-import { ViewportSectionComponent } from './viewport-section/viewport-section.component';
-import { TemplatesSectionComponent } from './templates-section/templates-section.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { ButtonComponent } from './shared/components/button/button.component';
-import {MatButtonModule} from '@angular/material/button';
 import { InputComponent } from './shared/components/input/input.component';
 import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
 import { TextareaComponent } from './shared/components/textarea/textarea.component';
 import { SelectComponent } from './shared/components/select/select.component';
+import { AppComponent } from './app.component';
+import { StylesSectionComponent } from './styles-section/styles-section.component';
+import { ViewportSectionComponent } from './viewport-section/viewport-section.component';
+import { TemplatesSectionComponent } from './templates-section/templates-section.component';
+import { environment } from '../environments/environment';
+import {componentsReducer, metaReducers, reducers} from './store/reducers';
+import {FormsModule} from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,9 +34,15 @@ import { SelectComponent } from './shared/components/select/select.component';
   ],
   imports: [
     BrowserModule,
+    ReactiveComponentModule,
+    FormsModule,
+    DragDropModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    MatButtonModule
+    StoreModule.forRoot(reducers, {metaReducers}),
+    MatButtonModule,
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

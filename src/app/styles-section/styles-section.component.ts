@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {AppState, ComponentState, getComponents} from '../store/reducers';
+import {State, Store} from '@ngrx/store';
+import {ComponentStyles} from '../shared/models/component-styles';
+import {Observable} from 'rxjs';
+import {UpdateComponents} from '../store/actions/actions';
 
 @Component({
   selector: 'app-styles-section',
@@ -7,9 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StylesSectionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<ComponentState>) { }
 
   ngOnInit(): void {
+  }
+
+  change(event: any): void {
   }
 
 }
