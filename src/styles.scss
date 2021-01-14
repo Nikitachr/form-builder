@@ -5,6 +5,11 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
 }
 
 .w {
@@ -21,6 +26,12 @@ button {
   background: none;
   outline: none;
   cursor: pointer;
+}
+
+input {
+  outline: none;
+  width: 100%;
+  padding: 0 10px;
 }
 
 html, body { height: 100%; }

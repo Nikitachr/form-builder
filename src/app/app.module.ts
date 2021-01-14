@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { ButtonComponent } from './shared/components/button/button.component';
 import {MatButtonModule} from '@angular/material/button';
+import { InputComponent } from './shared/components/input/input.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {MatButtonModule} from '@angular/material/button';
     StylesSectionComponent,
     ViewportSectionComponent,
     TemplatesSectionComponent,
-    ButtonComponent
+    ButtonComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
