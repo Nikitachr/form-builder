@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { InputComponent } from './shared/components/input/input.component';
 import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
 import { TextareaComponent } from './shared/components/textarea/textarea.component';
+import { SelectComponent } from './shared/components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TextareaComponent } from './shared/components/textarea/textarea.compone
     ButtonComponent,
     InputComponent,
     CheckboxComponent,
-    TextareaComponent
+    TextareaComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,
