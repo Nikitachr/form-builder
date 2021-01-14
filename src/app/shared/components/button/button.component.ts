@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import {ComponentStyles} from '../../models/component-styles';
+import { ComponentStyles } from '../../models/component-styles';
 
 @Component({
   selector: 'app-button',

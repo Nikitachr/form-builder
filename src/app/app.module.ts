@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { ButtonComponent } from './shared/components/button/button.component';
 import {MatButtonModule} from '@angular/material/button';
 import { InputComponent } from './shared/components/input/input.component';
+import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InputComponent } from './shared/components/input/input.component';
     ViewportSectionComponent,
     TemplatesSectionComponent,
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,
