@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ComponentStyles} from '../../models/component-styles';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { ComponentStyles } from '../../models/component-styles';
 
 @Component({
   selector: 'app-checkbox',
@@ -9,7 +10,7 @@ import {ComponentStyles} from '../../models/component-styles';
 export class CheckboxComponent implements OnInit {
 
   @Input() styles: ComponentStyles = {
-    placeholder: 'Button',
+    placeholder: 'Checkbox',
     width: 15,
     height: 15,
     required: true,

@@ -3,16 +3,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ComponentStyles } from '../../models/component-styles';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss']
 })
-export class InputComponent implements OnInit {
+export class TextareaComponent implements OnInit {
 
   @Input() styles: ComponentStyles = {
-    placeholder: 'Input',
-    width: 70,
-    height: 36,
+    placeholder: 'Text area',
+    width: 300,
+    height: 100,
     required: true,
     fontSize: 18,
     fontWeight: 400,

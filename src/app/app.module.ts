@@ -11,6 +11,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import {MatButtonModule} from '@angular/material/button';
 import { InputComponent } from './shared/components/input/input.component';
 import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
+import { TextareaComponent } from './shared/components/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CheckboxComponent } from './shared/components/checkbox/checkbox.compone
     TemplatesSectionComponent,
     ButtonComponent,
     InputComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    TextareaComponent
   ],
   imports: [
     BrowserModule,
