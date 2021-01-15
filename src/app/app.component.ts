@@ -24,19 +24,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadComponents([{
-      placeholder: 'Select',
-      width: 100,
-      height: 36,
-      required: true,
-      fontSize: 18,
-      fontWeight: 400,
-      color: '#000',
-      bgColor: '#fff',
-      borderRadius: 5,
-      borderWidth: 1,
-      borderColor: '#000'
-    }]));
   }
 
   enter(section: ESection): void {

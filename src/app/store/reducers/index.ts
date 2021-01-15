@@ -5,6 +5,7 @@ import {Actions, ActionTypes} from '../actions/actions';
 import {ESection} from '../../shared/enums/section.enum';
 import {EComponentType} from '../../shared/enums/componentType.enum';
 import { GeneralStyles } from '../../shared/models/general-styles.model';
+import {Action} from 'rxjs/internal/scheduler/Action';
 
 
 export interface ComponentState {
@@ -41,6 +42,10 @@ export function componentsReducer(state: ComponentState = initialState, action: 
     case ActionTypes.UpdateComponents:
       return {
         ...state, components: action.payload
+      };
+    case ActionTypes.AddComponent:
+      return  {
+        ...state, components: [...state.components, action.payload]
       };
     case ActionTypes.StartDragging:
       return {

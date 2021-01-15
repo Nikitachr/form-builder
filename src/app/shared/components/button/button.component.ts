@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 
 import { ComponentStyles } from '../../models/component-styles';
+import {EventEmitter} from 'events';
 
 @Component({
   selector: 'app-button',
@@ -23,8 +24,12 @@ export class ButtonComponent implements OnInit {
     borderColor: '#000'
   };
 
+
+
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
 }

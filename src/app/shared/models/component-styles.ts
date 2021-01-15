@@ -1,3 +1,5 @@
+import {EComponentType} from '../enums/componentType.enum';
+
 export interface ComponentStyles {
   placeholder?: string;
   width?: number;

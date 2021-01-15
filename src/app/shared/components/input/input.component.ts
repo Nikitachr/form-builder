@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ComponentStyles } from '../../models/component-styles';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../store/reducers';
+import {AddComponent} from '../../../store/actions/actions';
 
 @Component({
   selector: 'app-input',
@@ -23,9 +26,10 @@ export class InputComponent implements OnInit {
     borderColor: '#000'
   };
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new AddComponent(this.styles));
   }
 
 }

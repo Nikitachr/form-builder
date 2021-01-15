@@ -4,9 +4,9 @@ import {Store} from '@ngrx/store';
 import {Observable, of, merge, fromEvent, Subject} from 'rxjs';
 import {filter, map, scan, startWith} from 'rxjs/operators';
 import {ComponentStyles} from '../shared/models/component-styles';
-import {ChangeSection} from '../store/actions/actions';
+import {AddComponent, ChangeSection, UpdateComponents} from '../store/actions/actions';
 import {ESection} from '../shared/enums/section.enum';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal} from '@angular/cdk/portal';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {switchMap, tap} from 'rxjs/operators';
@@ -35,6 +35,7 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    console.log(ButtonComponent);
   }
 
   addComponent(component: any): void {

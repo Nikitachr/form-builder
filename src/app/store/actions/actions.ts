@@ -7,6 +7,7 @@ import {GeneralStyles} from '../../shared/models/general-styles.model';
 export enum ActionTypes {
   LoadComponents = '[Components] Load components',
   UpdateComponents = '[Components] Update components',
+  AddComponent = '[Components] Add component',
   StartDragging = '[Components] Start drag',
   EndDragging = '[Components] End drag',
   ChangeSection = '[Components] Change section',
@@ -24,6 +25,13 @@ export class UpdateComponents implements Action {
   constructor(public payload: ComponentStyles[]) {
   }
 }
+
+export class AddComponent implements Action {
+  readonly type = ActionTypes.AddComponent;
+  constructor(public payload: ComponentStyles) {
+  }
+}
+
 
 export class StartDragging implements Action {
   readonly type = ActionTypes.StartDragging;
@@ -53,4 +61,5 @@ export type Actions =
   | StartDragging
   | EndDragging
   | ChangeSection
-  | UpdateGeneralStyles;
+  | UpdateGeneralStyles
+  | AddComponent;
