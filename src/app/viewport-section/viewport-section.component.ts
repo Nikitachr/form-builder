@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AppState, ComponentState, getDragComponent, getIsDragging, getSection} from '../store/reducers';
+import {AppState, ComponentState, getDragComponent, getGeneralStyles, getIsDragging, getSection} from '../store/reducers';
 import {Store} from '@ngrx/store';
 import {Observable, of, merge, fromEvent, Subject} from 'rxjs';
 import {filter, map, scan, startWith} from 'rxjs/operators';
 import {ComponentStyles} from '../shared/models/component-styles';
 import {ChangeSection} from '../store/actions/actions';
 import {ESection} from '../shared/enums/section.enum';
-import { ComponentPortal}  from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {switchMap, tap} from 'rxjs/operators';
@@ -15,6 +15,7 @@ import {CheckboxComponent} from '../shared/components/checkbox/checkbox.componen
 import {SelectComponent} from '../shared/components/select/select.component';
 import {InputComponent} from '../shared/components/input/input.component';
 import {TextareaComponent} from '../shared/components/textarea/textarea.component';
+import {GeneralStyles} from '../shared/models/general-styles.model';
 
 
 @Component({
@@ -25,57 +26,38 @@ import {TextareaComponent} from '../shared/components/textarea/textarea.componen
 export class ViewportSectionComponent implements OnInit, AfterViewInit {
 
   componentPortal: ComponentPortal<any>[] = [];
-  state: Observable<any>;
-  click: Observable<any>;
+  generalStyles$: Observable<GeneralStyles> | undefined;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-  this.state = merge(
-    this.store.select(getIsDragging).pipe(map(
-      res => {
-      return { isDrag: res };
-    })),
-    this.store.select(getDragComponent).pipe(map(
-      res => {
-        return { dragComponent: res };
-      }
-    )),
-    this.store.select(getSection).pipe(map(
-      res => {
-        return { section: res };
-      }
-    ))
-  ).pipe(
-    scan((state: any, curr) => ({ ...state, ...curr }), {}),
-    filter(state => state.isDrag && state.section === ESection.Viewport),
-    tap(state => this.addComponent(state.dragComponent))
-  ).subscribe();
+    this.generalStyles$ = this.store.select(getGeneralStyles);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
   }
 
-  addComponent(type: EComponentType) {
-    switch (type) {
-      case EComponentType.Button:
-        return this.componentPortal.push(new ComponentPortal(ButtonComponent));
-      case EComponentType.Checkbox:
-        return this.componentPortal.push(new ComponentPortal(CheckboxComponent));
-      case EComponentType.Select:
-        return this.componentPortal.push(new ComponentPortal(SelectComponent));
-      case EComponentType.Input:
-        return this.componentPortal.push(new ComponentPortal(InputComponent));
-      case EComponentType.Textarea:
-        return this.componentPortal.push(new ComponentPortal(TextareaComponent));
-    }
+  addComponent(component: any): void {
+    this.componentPortal.push(new ComponentPortal(component));
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
+    console.log(event);
     if (event.container.id === event.previousContainer.id) {
       console.log(true);
     } else {
-      console.log(false);
+      switch (event.previousContainer.id) {
+        case 'list-1':
+          return this.addComponent(ButtonComponent);
+        case 'list-2':
+          return this.addComponent(InputComponent);
+        case 'list-3':
+          return this.addComponent(CheckboxComponent);
+        case 'list-4':
+          return this.addComponent(TextareaComponent);
+        case 'list-5':
+          return this.addComponent(SelectComponent);
+      }
     }
   }
 }

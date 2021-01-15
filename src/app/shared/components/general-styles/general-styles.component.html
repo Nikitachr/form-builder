@@ -1,0 +1,19 @@
+<div class="container" [formGroup]="form">
+  <div class="d__flex d__flex--items-center m__top--10">
+    <span class="m__right--10">Padding from left and right</span>
+    <input class="input" type="text" formControlName="paddingLeft">
+  </div>
+  <div class="d__flex d__flex--items-center m__top--10">
+    <span class="m__right--10">Padding from top and bottom</span>
+    <input class="input" type="text" formControlName="paddingTop">
+  </div>
+  <div class="d__flex d__flex--items-center m__top--10">
+    <span class="m__right--10">Background color</span>
+    <input class="color" [colorPicker]="form.get('backgroundColor').value" [style.background]="form.get('backgroundColor').value" (colorPickerChange)="colorChange($event)">
+  </div>
+  <div class="d__flex d__flex--items-center m__top--10">
+    <span class="m__right--10">Margins between components</span>
+    <input class="input" type="text" formControlName="margins">
+  </div>
+</div>
+

@@ -6,8 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PortalModule } from '@angular/cdk/portal';
-import {FormsModule} from '@angular/forms';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
@@ -19,7 +21,8 @@ import { StylesSectionComponent } from './styles-section/styles-section.componen
 import { ViewportSectionComponent } from './viewport-section/viewport-section.component';
 import { TemplatesSectionComponent } from './templates-section/templates-section.component';
 import { environment } from '../environments/environment';
-import {componentsReducer, metaReducers, reducers} from './store/reducers';
+import { componentsReducer, metaReducers, reducers } from './store/reducers';
+import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import {componentsReducer, metaReducers, reducers} from './store/reducers';
     InputComponent,
     CheckboxComponent,
     TextareaComponent,
-    SelectComponent
+    SelectComponent,
+    GeneralStylesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +47,12 @@ import {componentsReducer, metaReducers, reducers} from './store/reducers';
     PortalModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     MatButtonModule,
+    MatExpansionModule,
+    ColorPickerModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

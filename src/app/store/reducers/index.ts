@@ -4,6 +4,7 @@ import {ComponentStyles} from '../../shared/models/component-styles';
 import {Actions, ActionTypes} from '../actions/actions';
 import {ESection} from '../../shared/enums/section.enum';
 import {EComponentType} from '../../shared/enums/componentType.enum';
+import { GeneralStyles } from '../../shared/models/general-styles.model';
 
 
 export interface ComponentState {
@@ -11,6 +12,7 @@ export interface ComponentState {
   dragComponent: EComponentType | null;
   isDragging: boolean;
   section: ESection | null;
+  generalStyles: GeneralStyles;
 }
 
 const initialState: ComponentState = {
@@ -18,6 +20,12 @@ const initialState: ComponentState = {
   dragComponent: null,
   isDragging: false,
   section: null,
+  generalStyles: {
+    margins: 10,
+    paddingTop: 20,
+    paddingLeft: 20,
+    backgroundColor: '#fff'
+  }
 };
 
 export interface AppState {
@@ -42,9 +50,13 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       return {
         ...state, dragComponent: null, isDragging: false, section: null
       };
-    case  ActionTypes.ChangeSection:
+    case ActionTypes.ChangeSection:
       return {
         ...state, section: action.payload
+      };
+    case ActionTypes.UpdateGeneralStyles:
+      return  {
+        ...state, generalStyles: action.payload
       };
     default:
       return state;
@@ -60,5 +72,6 @@ export const getComponents = (state: AppState) => state.componentsState.componen
 export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
 export const getSection = (state: AppState) => state.componentsState.section;
 export const getDragComponent = (state: AppState) => state.componentsState.dragComponent;
+export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

@@ -1,4 +1,9 @@
 .m {
+  &__top {
+    &--10 {
+      margin-top: 10px;
+    }
+  }
   &__right {
     &--10 {
       margin-right: 10px;

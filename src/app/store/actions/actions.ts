@@ -2,13 +2,15 @@ import { Action } from '@ngrx/store';
 import { ComponentStyles } from '../../shared/models/component-styles';
 import { ESection } from '../../shared/enums/section.enum';
 import {EComponentType} from '../../shared/enums/componentType.enum';
+import {GeneralStyles} from '../../shared/models/general-styles.model';
 
 export enum ActionTypes {
   LoadComponents = '[Components] Load components',
   UpdateComponents = '[Components] Update components',
   StartDragging = '[Components] Start drag',
   EndDragging = '[Components] End drag',
-  ChangeSection = '[Components] Change section'
+  ChangeSection = '[Components] Change section',
+  UpdateGeneralStyles = '[Component] Update general styles'
 }
 
 export class LoadComponents implements Action {
@@ -39,10 +41,16 @@ export class ChangeSection implements Action {
   }
 }
 
+export class UpdateGeneralStyles implements Action {
+  readonly type = ActionTypes.UpdateGeneralStyles;
+  constructor(public payload: GeneralStyles) {
+  }
+}
 
 export type Actions =
   | LoadComponents
   | UpdateComponents
   | StartDragging
   | EndDragging
-  | ChangeSection;
+  | ChangeSection
+  | UpdateGeneralStyles;
