@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { ComponentStyles } from '../../shared/models/component-styles';
 import { ESection } from '../../shared/enums/section.enum';
+import {EComponentType} from '../../shared/enums/componentType.enum';
 
 export enum ActionTypes {
   LoadComponents = '[Components] Load components',
@@ -24,7 +25,7 @@ export class UpdateComponents implements Action {
 
 export class StartDragging implements Action {
   readonly type = ActionTypes.StartDragging;
-  constructor(public payload: ComponentStyles) {
+  constructor(public payload: EComponentType) {
   }
 }
 

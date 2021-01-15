@@ -5,6 +5,9 @@ import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { PortalModule } from '@angular/cdk/portal';
+import {FormsModule} from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputComponent } from './shared/components/input/input.component';
@@ -17,8 +20,7 @@ import { ViewportSectionComponent } from './viewport-section/viewport-section.co
 import { TemplatesSectionComponent } from './templates-section/templates-section.component';
 import { environment } from '../environments/environment';
 import {componentsReducer, metaReducers, reducers} from './store/reducers';
-import {FormsModule} from '@angular/forms';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     FormsModule,
     DragDropModule,
     BrowserAnimationsModule,
+    PortalModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     MatButtonModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),

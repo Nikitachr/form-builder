@@ -3,11 +3,12 @@ import {environment} from '../../../environments/environment';
 import {ComponentStyles} from '../../shared/models/component-styles';
 import {Actions, ActionTypes} from '../actions/actions';
 import {ESection} from '../../shared/enums/section.enum';
+import {EComponentType} from '../../shared/enums/componentType.enum';
 
 
 export interface ComponentState {
   components: ComponentStyles[] | [];
-  dragComponent: ComponentStyles | null;
+  dragComponent: EComponentType | null;
   isDragging: boolean;
   section: ESection | null;
 }
@@ -16,7 +17,7 @@ const initialState: ComponentState = {
   components: [],
   dragComponent: null,
   isDragging: false,
-  section: null
+  section: null,
 };
 
 export interface AppState {
@@ -56,5 +57,8 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const getComponents = (state: AppState) => state.componentsState.components;
+export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
+export const getSection = (state: AppState) => state.componentsState.section;
+export const getDragComponent = (state: AppState) => state.componentsState.dragComponent;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

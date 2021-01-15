@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {fromEvent, Observable, Subscription} from 'rxjs';
 import { Store } from '@ngrx/store';
-import {LoadComponents, UpdateComponents} from './store/actions/actions';
-import {ComponentState} from './store/reducers';
+import {ChangeSection, LoadComponents, UpdateComponents} from './store/actions/actions';
+import {AppState, ComponentState, getIsDragging} from './store/reducers';
+import {ESection} from './shared/enums/section.enum';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,14 @@ import {ComponentState} from './store/reducers';
 export class AppComponent implements OnInit{
   title = 'form-builder';
 
-  constructor(private store: Store<ComponentState>) {
+  isDragging: boolean | undefined;
+  isDragging$: Observable<boolean>;
+
+  Section = ESection;
+
+  constructor(private store: Store<AppState>) {
+    this.isDragging$ = this.store.select(getIsDragging);
+    this.isDragging$.subscribe(res => this.isDragging = res);
   }
 
   ngOnInit(): void {
@@ -31,5 +39,10 @@ export class AppComponent implements OnInit{
     }]));
   }
 
+  enter(section: ESection): void {
+    if (this.isDragging) {
+      this.store.dispatch(new ChangeSection(section));
+    }
+  }
 }
 

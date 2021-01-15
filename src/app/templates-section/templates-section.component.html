@@ -1,20 +1,20 @@
-<div class="d__flex" cdkDropList>
-  <app-button cdkDrag></app-button>
+<div class="d__flex" cdkDropList id="list-1" cdkDropListConnectedTo="list-6">
+  <app-button cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Button)" (cdkDragEnded)="dragEnd($event)"></app-button>
 </div>
 
-<div class="d__flex" cdkDropList>
-  <app-input cdkDrag></app-input>
+<div class="d__flex" cdkDropList id="list-2" cdkDropListConnectedTo="list-6">
+  <app-input cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Input)" (cdkDragEnded)="dragEnd($event)"></app-input>
 </div>
 
-<div class="d__flex" cdkDropList>
-  <app-checkbox cdkDrag></app-checkbox>
+<div class="d__flex" cdkDropList id="list-3" cdkDropListConnectedTo="list-6">
+  <app-checkbox cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Checkbox)" (cdkDragEnded)="dragEnd($event)"></app-checkbox>
 </div>
 
-<div class="d__flex" cdkDropList>
-  <app-textarea cdkDrag></app-textarea>
+<div class="d__flex" cdkDropList id="list-4" cdkDropListConnectedTo="list-6">
+  <app-textarea cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Textarea)" (cdkDragEnded)="dragEnd($event)"></app-textarea>
 </div>
 
-<div class="d__flex" cdkDropList>
-  <app-select cdkDrag></app-select>
+<div class="d__flex" cdkDropList id="list-5" cdkDropListConnectedTo="list-6">
+  <app-select cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Select)" (cdkDragEnded)="dragEnd($event)"></app-select>
 </div>
 

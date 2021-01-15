@@ -1,5 +1,8 @@
 <div class="d__flex d__flex--justify-between">
-  <app-styles-section></app-styles-section>
-  <app-viewport-section></app-viewport-section>
-  <app-templates-section></app-templates-section>
+  <app-styles-section (mouseenter)="enter(Section.Styles)"></app-styles-section>
+  <ng-container cdkDropListGroup>
+    <app-viewport-section (mouseenter)="enter(Section.Viewport)"></app-viewport-section>
+    <app-templates-section (mouseenter)="enter(Section.Templates)"></app-templates-section>
+  </ng-container>
 </div>
+
