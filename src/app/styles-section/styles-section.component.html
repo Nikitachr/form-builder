@@ -1,4 +1,4 @@
-<mat-accordion>
+<mat-accordion *ngrxLet="components$ as components">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -6,5 +6,14 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-general-styles></app-general-styles>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngFor="let component of components; trackBy:identify">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{component.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-component-styles [component]="component"></app-component-styles>
   </mat-expansion-panel>
 </mat-accordion>

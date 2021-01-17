@@ -4,6 +4,8 @@ import { ComponentStyles } from '../../models/component-styles';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/reducers';
 import {AddComponent} from '../../../store/actions/actions';
+import { IdService } from '../../services/id.service';
+import { EComponentType } from '../../enums/componentType.enum';
 
 @Component({
   selector: 'app-textarea',
@@ -12,7 +14,7 @@ import {AddComponent} from '../../../store/actions/actions';
 })
 export class TextareaComponent implements OnInit {
 
-  @Input() styles: ComponentStyles = {
+  styles: ComponentStyles = {
     placeholder: 'Text area',
     width: 300,
     height: 100,
@@ -26,10 +28,24 @@ export class TextareaComponent implements OnInit {
     borderColor: '#000'
   };
 
-  constructor(private store: Store<AppState>) { }
+  @Input() isTemplate: boolean = false;
+  ComponentType = EComponentType.Textarea;
+  id: number | undefined;
+  name: string | undefined
+
+  constructor(private IdService: IdService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new AddComponent(this.styles));
+    this.componentInit();
+  }
+
+  componentInit() {
+    if(this.isTemplate) {
+      return;
+    }
+    this.id = this.IdService.getId();
+    this.name = this.ComponentType;
+    this.store.dispatch(new AddComponent({ id: this.id, name: this.name, componentType: this.ComponentType, styles: this.styles }));
   }
 
 }

@@ -3,7 +3,7 @@ import {AppState, ComponentState, getComponents} from '../store/reducers';
 import {State, Store} from '@ngrx/store';
 import {ComponentStyles} from '../shared/models/component-styles';
 import {Observable} from 'rxjs';
-import {UpdateComponents} from '../store/actions/actions';
+import { UIComponent } from '../shared/models/component.model';
 
 @Component({
   selector: 'app-styles-section',
@@ -12,12 +12,15 @@ import {UpdateComponents} from '../store/actions/actions';
 })
 export class StylesSectionComponent implements OnInit {
 
-  constructor(private store: Store<ComponentState>) { }
+  components$: Observable<UIComponent[]> 
+
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.components$ = this.store.select(getComponents)
   }
 
-  change(event: any): void {
+  identify(index, item){
+    return item.id;
   }
-
 }

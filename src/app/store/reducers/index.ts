@@ -1,4 +1,4 @@
-import {ActionReducerMap, MetaReducer} from '@ngrx/store';
+import {ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
 import {ComponentStyles} from '../../shared/models/component-styles';
 import {Actions, ActionTypes} from '../actions/actions';
@@ -6,10 +6,12 @@ import {ESection} from '../../shared/enums/section.enum';
 import {EComponentType} from '../../shared/enums/componentType.enum';
 import { GeneralStyles } from '../../shared/models/general-styles.model';
 import {Action} from 'rxjs/internal/scheduler/Action';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { UIComponent } from 'src/app/shared/models/component.model';
 
 
 export interface ComponentState {
-  components: ComponentStyles[] | [];
+  components: UIComponent[];
   dragComponent: EComponentType | null;
   isDragging: boolean;
   section: ESection | null;
@@ -39,9 +41,12 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       return {
         ...state, components: action.payload
       };
-    case ActionTypes.UpdateComponents:
+    case ActionTypes.UpdateComponent:
+      const newArr = [...state.components];
+      const index = state.components.findIndex(el => el.id === action.payload.id);
+      newArr.splice(index, 1, action.payload);
       return {
-        ...state, components: action.payload
+        ...state, components: newArr
       };
     case ActionTypes.AddComponent:
       return  {
@@ -68,12 +73,20 @@ export function componentsReducer(state: ComponentState = initialState, action: 
   }
 }
 
-
 export const reducers: ActionReducerMap<AppState> = {
   componentsState: componentsReducer
 };
 
 export const getComponents = (state: AppState) => state.componentsState.components;
+export const getComponentById = (id: number) => createSelector(getComponents, (allItems) => {
+  if (allItems) {
+    return allItems.find(item => {
+      return item.id === id;
+    });
+  } else {
+    return {};
+  }
+});
 export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
 export const getSection = (state: AppState) => state.componentsState.section;
 export const getDragComponent = (state: AppState) => state.componentsState.dragComponent;

@@ -1,12 +1,17 @@
-<div class="container d__flex d__flex--direction-column d__flex--items-center"
-     cdkDropList id="list-6" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4', 'list-5']" (cdkDropListDropped)="drop($event)"
-     *ngrxLet="generalStyles$ as styles" [ngStyle]="{
-        'padding': styles.paddingTop + 'px ' + styles.paddingLeft + 'px',
-        'backgroundColor': styles.backgroundColor
-}">
-  <div class="example-list d__flex d__flex--direction-column d__flex--items-center">
-    <div class="w__100per example-list d__flex d__flex--direction-column d__flex--items-center" *ngFor="let component of componentPortal" [ngStyle]="{ 'marginBottom': styles.margins + 'px' }">
-      <ng-template [cdkPortalOutlet]="component"></ng-template>
-    </div>
+<ng-container *ngrxLet="generalStyles$ as styles">
+  <div
+  cdkDropList
+  id="list-6"
+  [cdkDropListData]="componentPortal"
+  [cdkDropListConnectedTo]="'list-1'"
+  class="d__flex d__flex--direction-column h__100vh d__flex--items-center"
+  (cdkDropListDropped)="drop($event)"
+  [ngStyle]="{
+    'padding': styles.paddingTop + 'px ' + styles.paddingLeft + 'px',
+    'backgroundColor': styles.backgroundColor
+  }">
+  <div class="example-box" [ngStyle]="{ 'marginBottom': styles.margins + 'px' }" *ngFor="let component of componentPortal" cdkDrag>
+    <ng-template [cdkPortalOutlet]="component" (attached)="foo($event)"></ng-template>
   </div>
 </div>
+</ng-container>

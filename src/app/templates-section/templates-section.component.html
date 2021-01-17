@@ -1,20 +1,16 @@
-<div class="d__flex" cdkDropList id="list-1" cdkDropListConnectedTo="list-6" (cdkDropListDropped)="drop($event)">
-  <app-button cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Button)" (cdkDragEnded)="dragEnd($event)" ></app-button>
+<div
+    cdkDropList
+    id="list-1"
+    [cdkDropListData]="templateComponents"
+    [cdkDropListConnectedTo]="'list-6'"
+    class="d__flex d__flex--direction-column"
+    [cdkDropListSortingDisabled]="true"
+    (cdkDropListDropped)="drop($event)"
+    >
+    <div class="example-box" *ngFor="let component of templateComponents" cdkDrag [cdkDragData]='component'>
+      <ng-template [cdkPortalOutlet]="component" (attached)="foo($event)"></ng-template>
+    </div>
 </div>
 
-<div class="d__flex" cdkDropList id="list-2" cdkDropListConnectedTo="list-6" (cdkDropListDropped)="drop($event)">
-  <app-input cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Input)" (cdkDragEnded)="dragEnd($event)"></app-input>
-</div>
 
-<div class="d__flex" cdkDropList id="list-3" cdkDropListConnectedTo="list-6" (cdkDropListDropped)="drop($event)">
-  <app-checkbox cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Checkbox)" (cdkDragEnded)="dragEnd($event)"></app-checkbox>
-</div>
-
-<div class="d__flex" cdkDropList id="list-4" cdkDropListConnectedTo="list-6" (cdkDropListDropped)="drop($event)">
-  <app-textarea cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Textarea)" (cdkDragEnded)="dragEnd($event)"></app-textarea>
-</div>
-
-<div class="d__flex" cdkDropList id="list-5" cdkDropListConnectedTo="list-6" (cdkDropListDropped)="drop($event)">
-  <app-select cdkDrag (cdkDragStarted)="dragStart($event, ComponentType.Select)" (cdkDragEnded)="dragEnd($event)"></app-select>
-</div>
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ComponentRef, InjectionToken, OnInit} from '@angular/core';
 import {AppState, ComponentState, getDragComponent, getGeneralStyles, getIsDragging, getSection} from '../store/reducers';
 import {Store} from '@ngrx/store';
 import {Observable, of, merge, fromEvent, Subject} from 'rxjs';
@@ -6,9 +6,9 @@ import {filter, map, scan, startWith} from 'rxjs/operators';
 import {ComponentStyles} from '../shared/models/component-styles';
 import {AddComponent, ChangeSection, UpdateComponents} from '../store/actions/actions';
 import {ESection} from '../shared/enums/section.enum';
-import { ComponentPortal} from '@angular/cdk/portal';
+import { CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
 import { ButtonComponent } from '../shared/components/button/button.component';
-import {CdkDragDrop} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {switchMap, tap} from 'rxjs/operators';
 import {EComponentType} from '../shared/enums/componentType.enum';
 import {CheckboxComponent} from '../shared/components/checkbox/checkbox.component';
@@ -16,7 +16,6 @@ import {SelectComponent} from '../shared/components/select/select.component';
 import {InputComponent} from '../shared/components/input/input.component';
 import {TextareaComponent} from '../shared/components/textarea/textarea.component';
 import {GeneralStyles} from '../shared/models/general-styles.model';
-
 
 @Component({
   selector: 'app-viewport-section',
@@ -28,6 +27,12 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
   componentPortal: ComponentPortal<any>[] = [];
   generalStyles$: Observable<GeneralStyles> | undefined;
 
+  foo(ref: CdkPortalOutletAttachedRef) {
+    ref = ref as ComponentRef<any>;
+    ref.instance.isTemplate = false;
+  }
+
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
@@ -35,7 +40,6 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(ButtonComponent);
   }
 
   addComponent(component: any): void {
@@ -43,22 +47,13 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
   }
 
   drop(event: CdkDragDrop<string[]>): void {
-    console.log(event);
     if (event.container.id === event.previousContainer.id) {
-      console.log(true);
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      switch (event.previousContainer.id) {
-        case 'list-1':
-          return this.addComponent(ButtonComponent);
-        case 'list-2':
-          return this.addComponent(InputComponent);
-        case 'list-3':
-          return this.addComponent(CheckboxComponent);
-        case 'list-4':
-          return this.addComponent(TextareaComponent);
-        case 'list-5':
-          return this.addComponent(SelectComponent);
-      }
+      copyArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
   }
 }

@@ -23,11 +23,13 @@ import { TemplatesSectionComponent } from './templates-section/templates-section
 import { environment } from '../environments/environment';
 import { componentsReducer, metaReducers, reducers } from './store/reducers';
 import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
+import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ComponentStylesComponent, 
     StylesSectionComponent,
     ViewportSectionComponent,
     TemplatesSectionComponent,
