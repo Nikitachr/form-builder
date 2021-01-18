@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operators';
 
 import { AppState, getComponents, getSelectedComponent } from '../store/reducers';
 import { UIComponent } from '../shared/models/component.model';
+import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-styles-section',
@@ -13,8 +14,9 @@ import { UIComponent } from '../shared/models/component.model';
 })
 export class StylesSectionComponent implements OnInit {
 
-  selectedComponent$: Observable<UIComponent> | undefined;
+  selectedComponent$: Observable<number> | undefined;
   components$: Observable<UIComponent[]> | undefined;
+  array: any[] | undefined;
 
   constructor(private store: Store<AppState>) { }
 
@@ -26,5 +28,13 @@ export class StylesSectionComponent implements OnInit {
 
   identify(index: any, item: any): number{
     return item.id;
+  }
+
+  drop(event: CdkDragDrop<string[]>): void {
+    if (event.container.id === event.previousContainer.id) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      event.previousContainer.data = [];
+    }
   }
 }

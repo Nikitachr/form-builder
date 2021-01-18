@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import { metaReducers, reducers } from './store/reducers';
 import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
 import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
+import { LabelComponent } from './shared/components/label/label.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ComponentStylesComponent } from './shared/components/component-styles/c
     CheckboxComponent,
     TextareaComponent,
     SelectComponent,
-    GeneralStylesComponent
+    GeneralStylesComponent,
+    LabelComponent
   ],
   imports: [
     BrowserModule,

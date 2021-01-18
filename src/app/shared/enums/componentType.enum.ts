@@ -3,5 +3,6 @@ export enum EComponentType {
   Textarea = 'Textarea',
   Button = 'Button',
   Checkbox = 'Checkbox',
-  Select = 'Select'
+  Select = 'Select',
+  Label = 'Label'
 }

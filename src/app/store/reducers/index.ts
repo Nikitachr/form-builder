@@ -2,26 +2,22 @@ import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
 
 import { environment } from '../../../environments/environment';
 import { ActionTypes } from '../actions/actions';
-import { ESection } from '../../shared/enums/section.enum';
 import { EComponentType } from '../../shared/enums/componentType.enum';
 import { GeneralStyles } from '../../shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
+import {ESection} from '../../shared/enums/section.enum';
 
 
 export interface ComponentState {
   components: UIComponent[];
-  dragComponent: EComponentType | null;
   selectedComponent: UIComponent | null;
-  isDragging: boolean;
   section: ESection | null;
   generalStyles: GeneralStyles;
 }
 
 const initialState: ComponentState = {
   components: [],
-  dragComponent: null,
   selectedComponent: null,
-  isDragging: false,
   section: null,
   generalStyles: {
     margins: 10,
@@ -52,14 +48,6 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       return  {
         ...state, components: [...state.components, action.payload], selectedComponent: action.payload
       };
-    case ActionTypes.StartDragging:
-      return {
-        ...state, dragComponent: action.payload, isDragging: true
-      };
-    case ActionTypes.EndDragging:
-      return {
-        ...state, dragComponent: null, isDragging: false, section: null
-      };
     case ActionTypes.ChangeSection:
       return {
         ...state, section: action.payload
@@ -71,6 +59,10 @@ export function componentsReducer(state: ComponentState = initialState, action: 
     case ActionTypes.SelectComponent:
       return  {
         ...state, selectedComponent: action.payload
+      };
+    case ActionTypes.DeleteComponent:
+      return {
+        ...state, components: state.components.filter(el => el.id !== action.payload)
       };
     default:
       return state;
@@ -101,9 +93,8 @@ export const getComponentByType = (type: EComponentType) => createSelector(getCo
   }
 });
 
-export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
-export const getSection = (state: AppState) => state.componentsState.section;
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;
 export const getSelectedComponent = (state: AppState) => state.componentsState.selectedComponent;
+export const getSection = (state: AppState) => state.componentsState.section;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

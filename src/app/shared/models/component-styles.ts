@@ -1,3 +1,5 @@
+import { EAlignType } from '../enums/align.enum';
+
 export interface ComponentStyles {
   placeholder?: string;
   width?: number;
@@ -10,4 +12,5 @@ export interface ComponentStyles {
   borderRadius?: number;
   borderWidth?: number;
   borderColor?: string;
+  align?: EAlignType;
 }

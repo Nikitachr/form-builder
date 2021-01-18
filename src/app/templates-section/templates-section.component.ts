@@ -5,12 +5,12 @@ import { CdkPortalOutletAttachedRef, ComponentPortal } from '@angular/cdk/portal
 
 import { EComponentType } from '../shared/enums/componentType.enum';
 import { ComponentState } from '../store/reducers';
-import { EndDragging } from '../store/actions/actions';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { CheckboxComponent } from '../shared/components/checkbox/checkbox.component';
 import { InputComponent } from '../shared/components/input/input.component';
 import { SelectComponent } from '../shared/components/select/select.component';
 import { TextareaComponent } from '../shared/components/textarea/textarea.component';
+import {LabelComponent} from '../shared/components/label/label.component';
 
 @Component({
   selector: 'app-templates-section',
@@ -27,7 +27,8 @@ export class TemplatesSectionComponent implements OnInit {
     new ComponentPortal(CheckboxComponent),
     new ComponentPortal(InputComponent),
     new ComponentPortal(SelectComponent),
-    new ComponentPortal(TextareaComponent)
+    new ComponentPortal(TextareaComponent),
+    new ComponentPortal(LabelComponent)
   ];
 
   foo(ref: CdkPortalOutletAttachedRef): void {
@@ -41,12 +42,7 @@ export class TemplatesSectionComponent implements OnInit {
 
   }
 
-  dragEnd(event: any): void {
-    this.store.dispatch(new EndDragging());
-  }
-
   drop(event: CdkDragDrop<string[]>): void {
-    console.log(event);
     if (event.container.id === event.previousContainer.id) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -55,6 +51,10 @@ export class TemplatesSectionComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  noReturnPredicate(): boolean {
+    return false;
   }
 
 }

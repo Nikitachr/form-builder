@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, ComponentRef, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { CdkPortalOutletAttachedRef, ComponentPortal } from '@angular/cdk/portal';
-import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import {AfterViewInit, Component, ComponentRef, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
+import {CdkDragDrop, copyArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
 
-import { AppState, getGeneralStyles } from '../store/reducers';
-import { GeneralStyles } from '../shared/models/general-styles.model';
+import {AppState, getGeneralStyles, getSection} from '../store/reducers';
+import {GeneralStyles} from '../shared/models/general-styles.model';
+import {ESection} from '../shared/enums/section.enum';
 
 @Component({
   selector: 'app-viewport-section',
@@ -14,6 +15,8 @@ import { GeneralStyles } from '../shared/models/general-styles.model';
 })
 export class ViewportSectionComponent implements OnInit, AfterViewInit {
 
+  section: ESection | undefined;
+  section$: Observable<ESection> | undefined;
   componentPortal: ComponentPortal<any>[] = [];
   generalStyles$: Observable<GeneralStyles> | undefined;
 
@@ -27,6 +30,8 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.generalStyles$ = this.store.select(getGeneralStyles);
+    this.section$ = this.store.select(getSection) as Observable<ESection>;
+    this.section$.subscribe(res => this.section = res);
   }
 
   ngAfterViewInit(): void {
@@ -38,6 +43,10 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
 
   drop(event: CdkDragDrop<string[]>): void {
     if (event.container.id === event.previousContainer.id) {
+      if (!event.isPointerOverContainer) {
+        this.componentPortal.splice(event.previousIndex, 1);
+        return;
+      }
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       copyArrayItem(event.previousContainer.data,
@@ -46,4 +55,5 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
         event.currentIndex);
     }
   }
+
 }

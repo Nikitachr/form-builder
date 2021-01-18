@@ -5,9 +5,10 @@
     [cdkDropListConnectedTo]="'list-6'"
     class="d__flex d__flex--direction-column"
     [cdkDropListSortingDisabled]="true"
+    [cdkDropListEnterPredicate]="noReturnPredicate"
     (cdkDropListDropped)="drop($event)"
     >
-    <div class="example-box" *ngFor="let component of templateComponents" cdkDrag [cdkDragData]='component'>
+    <div class="example-box" *ngFor="let component of templateComponents" cdkDrag>
       <ng-template [cdkPortalOutlet]="component" (attached)="foo($event)"></ng-template>
     </div>
 </div>

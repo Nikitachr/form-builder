@@ -1,10 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import * as _ from 'lodash';
 
-import { UpdateComponent } from 'src/app/store/actions/actions';
-import { AppState } from 'src/app/store/reducers';
-import { UIComponent } from '../../models/component.model';
+import {UpdateComponent} from 'src/app/store/actions/actions';
+import {AppState} from 'src/app/store/reducers';
+import {UIComponent} from '../../models/component.model';
+import {EComponentType} from '../../enums/componentType.enum';
+import {EAlignType} from '../../enums/align.enum';
+import {ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-component-styles',
@@ -13,8 +17,12 @@ import { UIComponent } from '../../models/component.model';
 })
 export class ComponentStylesComponent implements OnInit {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
   @Input() component: UIComponent | undefined;
 
+  AlignType = EAlignType;
+  ComponentType = EComponentType;
   form: FormGroup | undefined;
 
   constructor(private store: Store<AppState>) { }
@@ -26,30 +34,23 @@ export class ComponentStylesComponent implements OnInit {
   }
 
   initForm(): void {
-    this.form = new FormGroup({
-      placeholder: new FormControl('', [Validators.required]),
-      width: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      height: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      required: new FormControl('', [Validators.required]),
-      fontSize: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      fontWeight: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      color: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
-      bgColor: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
-      borderRadius: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      borderWidth: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      borderColor: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
-    });
+    this.form = _.cloneDeep(this.component?.editForm);
   }
 
   updateStyles(): void {
     if (this.form?.invalid) {
       return;
     }
+
     this.store.dispatch(new UpdateComponent({...this.component as UIComponent, styles: this.form?.value}));
   }
 
   colorChange(color: string, field: string): void {
     this.form?.get(field)?.setValue(color);
+  }
+
+  alignChange(type: EAlignType): void {
+    this.form?.get('align')?.setValue(type);
   }
 
 }
