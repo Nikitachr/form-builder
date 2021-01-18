@@ -82,6 +82,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const getComponents = (state: AppState) => state.componentsState.components;
+
 export const getComponentById = (id: number) => createSelector(getComponents, (allItems) => {
   if (allItems) {
     return allItems.find(item => {
@@ -91,6 +92,15 @@ export const getComponentById = (id: number) => createSelector(getComponents, (a
     return {};
   }
 });
+
+export const getComponentByType = (type: EComponentType) => createSelector(getComponents, (allItems) => {
+  if (allItems) {
+    return allItems.filter(item => item.componentType === type);
+  } else {
+    return {};
+  }
+});
+
 export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
 export const getSection = (state: AppState) => state.componentsState.section;
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;

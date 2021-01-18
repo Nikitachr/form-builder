@@ -10,7 +10,7 @@
     'padding': styles.paddingTop + 'px ' + styles.paddingLeft + 'px',
     'backgroundColor': styles.backgroundColor
   }">
-  <div class="example-box" [ngStyle]="{ 'marginBottom': styles.margins + 'px' }" *ngFor="let component of componentPortal" cdkDrag>
+  <div class="example-box" [ngStyle]="{ 'marginBottom': styles.margins + 'px' }" *ngFor="let component of componentPortal; let i = index" cdkDrag>
     <ng-template [cdkPortalOutlet]="component" (attached)="foo($event)"></ng-template>
   </div>
 </div>

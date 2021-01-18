@@ -1,12 +1,12 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 
 import { ComponentStyles } from '../../models/component-styles';
 import { AppState, getComponentById } from '../../../store/reducers';
 import { AddComponent, SelectComponentAction } from '../../../store/actions/actions';
-import { IdService } from '../../services/id.service';
+import { ComponentService } from '../../services/component.service';
 import { EComponentType } from '../../enums/componentType.enum';
 
 @Component({
@@ -44,7 +44,7 @@ export class InputComponent implements OnInit {
     this.store.dispatch(new SelectComponentAction({ id: this.id as number, name: this.name as string, componentType: this.ComponentType, styles: this.styles }));
   }
 
-  constructor(private IdService: IdService, private store: Store<AppState>) { }
+  constructor(private idService: ComponentService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.componentInit();
@@ -54,9 +54,9 @@ export class InputComponent implements OnInit {
     if (this.isTemplate) {
       return;
     }
-    this.id = this.IdService.getId();
-    this.name = this.ComponentType;
-    this.store.dispatch(new AddComponent({ id: this.id, name: this.name, componentType: this.ComponentType, styles: this.styles }));
+    this.id = this.idService.getId();
+    this.idService.getName(this.ComponentType).pipe(first()).subscribe(res => this.name = res);
+    this.store.dispatch(new AddComponent({ id: this.id, name: this.name as string, componentType: this.ComponentType, styles: this.styles }));
     this.styles$ = this.store.select(getComponentById(this.id)).pipe(map((component: any) => component.styles));
     this.styles$.subscribe(styles => this.styles = styles);
   }
