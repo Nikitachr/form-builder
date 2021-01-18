@@ -8,7 +8,7 @@
     <app-general-styles></app-general-styles>
   </mat-expansion-panel>
 
-  <mat-expansion-panel *ngFor="let component of components; trackBy:identify">
+  <mat-expansion-panel [expanded]="(selectedComponent$ | ngrxPush)?.id === component.id" *ngFor="let component of components; trackBy:identify">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{component.name}}

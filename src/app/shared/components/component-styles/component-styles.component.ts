@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+
 import { UpdateComponent } from 'src/app/store/actions/actions';
 import { AppState } from 'src/app/store/reducers';
 import { UIComponent } from '../../models/component.model';
@@ -14,14 +15,14 @@ export class ComponentStylesComponent implements OnInit {
 
   @Input() component: UIComponent | undefined;
 
-  form: FormGroup;
+  form: FormGroup | undefined;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.form.patchValue(this.component?.styles as UIComponent);
-    this.form.valueChanges.subscribe(() => this.updateStyles());
+    this.form?.patchValue(this.component?.styles as UIComponent);
+    this.form?.valueChanges.subscribe(() => this.updateStyles());
   }
 
   initForm(): void {
@@ -48,7 +49,7 @@ export class ComponentStylesComponent implements OnInit {
   }
 
   colorChange(color: string, field: string): void {
-    this.form.get(field)?.setValue(color);
+    this.form?.get(field)?.setValue(color);
   }
 
 }

@@ -21,7 +21,7 @@ import { StylesSectionComponent } from './styles-section/styles-section.componen
 import { ViewportSectionComponent } from './viewport-section/viewport-section.component';
 import { TemplatesSectionComponent } from './templates-section/templates-section.component';
 import { environment } from '../environments/environment';
-import { componentsReducer, metaReducers, reducers } from './store/reducers';
+import { metaReducers, reducers } from './store/reducers';
 import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
 import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
 
@@ -29,7 +29,7 @@ import { ComponentStylesComponent } from './shared/components/component-styles/c
 @NgModule({
   declarations: [
     AppComponent,
-    ComponentStylesComponent, 
+    ComponentStylesComponent,
     StylesSectionComponent,
     ViewportSectionComponent,
     TemplatesSectionComponent,

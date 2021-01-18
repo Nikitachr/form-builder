@@ -1,15 +1,15 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+/* tslint:disable */
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AddComponent } from 'src/app/store/actions/actions';
+
+import { AddComponent, SelectComponentAction } from 'src/app/store/actions/actions';
 import { AppState, getComponentById } from 'src/app/store/reducers';
 import { EComponentType } from '../../enums/componentType.enum';
-
 import { ComponentStyles } from '../../models/component-styles';
-import { UIComponent } from '../../models/component.model';
 import { IdService } from '../../services/id.service';
-import { ComponentStylesComponent } from '../component-styles/component-styles.component';
+
 
 
 @Component({
@@ -19,7 +19,7 @@ import { ComponentStylesComponent } from '../component-styles/component-styles.c
 })
 export class ButtonComponent implements OnInit {
 
-  styles$: Observable<ComponentStyles>;
+  styles$: Observable<ComponentStyles> | undefined;
   styles: ComponentStyles = {
     placeholder: 'Button',
     width: 70,
@@ -36,9 +36,17 @@ export class ButtonComponent implements OnInit {
 
   @Input() isTemplate: boolean = false;
 
+  @HostListener('click', ['$event'])
+  onClick(): void {
+    if (this.isTemplate) {
+      return;
+    }
+    this.store.dispatch(new SelectComponentAction({ id: this.id, name: this.name, componentType: this.ComponentType, styles: this.styles }));
+  }
+
   ComponentType = EComponentType.Button;
   id: number = 0;
-  name: string | undefined
+  name: string = '';
 
   constructor(private IdService: IdService, private store: Store<AppState>) { }
 
@@ -46,8 +54,8 @@ export class ButtonComponent implements OnInit {
     this.componentInit();
   }
 
-  componentInit() {
-    if(this.isTemplate) {
+  componentInit(): void {
+    if (this.isTemplate) {
       return;
     }
     this.id = this.IdService.getId();

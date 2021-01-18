@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AppState, ComponentState, getComponents} from '../store/reducers';
-import {State, Store} from '@ngrx/store';
-import {ComponentStyles} from '../shared/models/component-styles';
-import {Observable} from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+import { AppState, getComponents, getSelectedComponent } from '../store/reducers';
 import { UIComponent } from '../shared/models/component.model';
 
 @Component({
@@ -12,15 +13,18 @@ import { UIComponent } from '../shared/models/component.model';
 })
 export class StylesSectionComponent implements OnInit {
 
-  components$: Observable<UIComponent[]> 
+  selectedComponent$: Observable<UIComponent> | undefined;
+  components$: Observable<UIComponent[]> | undefined;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.components$ = this.store.select(getComponents)
+    this.components$ = this.store.select(getComponents).pipe(delay(0));
+    // @ts-ignore
+    this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
   }
 
-  identify(index, item){
+  identify(index: any, item: any): number{
     return item.id;
   }
 }

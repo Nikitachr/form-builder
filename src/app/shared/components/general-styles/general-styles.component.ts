@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState, getGeneralStyles} from '../../../store/reducers';
-import {Observable} from 'rxjs';
-import {GeneralStyles} from '../../models/general-styles.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UpdateGeneralStyles} from '../../../store/actions/actions';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AppState, getGeneralStyles } from '../../../store/reducers';
+import { GeneralStyles } from '../../models/general-styles.model';
+import { UpdateGeneralStyles } from '../../../store/actions/actions';
 
 @Component({
   selector: 'app-general-styles',
@@ -16,7 +17,7 @@ export class GeneralStylesComponent implements OnInit {
   generalStyles$: Observable<GeneralStyles> | undefined;
   generalStyles: GeneralStyles | undefined;
 
-  form: FormGroup;
+  form: FormGroup | undefined;
 
   constructor(private store: Store<AppState>) { }
 
@@ -24,8 +25,8 @@ export class GeneralStylesComponent implements OnInit {
     this.generalStyles$ = this.store.select(getGeneralStyles);
     this.generalStyles$.subscribe(res => this.generalStyles = res);
     this.initForm();
-    this.form.patchValue(this.generalStyles as GeneralStyles);
-    this.form.valueChanges.subscribe(() => this.updateStyles());
+    this.form?.patchValue(this.generalStyles as GeneralStyles);
+    this.form?.valueChanges.subscribe(() => this.updateStyles());
   }
 
   initForm(): void {
@@ -45,7 +46,7 @@ export class GeneralStylesComponent implements OnInit {
   }
 
   colorChange(color: string): void {
-    this.form.get('backgroundColor')?.setValue(color);
+    this.form?.get('backgroundColor')?.setValue(color);
   }
 
 }

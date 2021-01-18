@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class IdService {
 
-  id: number = 0;
+  id = 0;
 
 constructor() { }
 

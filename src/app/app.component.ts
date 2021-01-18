@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {fromEvent, Observable, Subscription} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {ChangeSection, LoadComponents, UpdateComponents} from './store/actions/actions';
-import {AppState, ComponentState, getIsDragging} from './store/reducers';
-import {ESection} from './shared/enums/section.enum';
+
+import { ChangeSection } from './store/actions/actions';
+import { AppState, getIsDragging } from './store/reducers';
+import { ESection } from './shared/enums/section.enum';
 
 @Component({
   selector: 'app-root',

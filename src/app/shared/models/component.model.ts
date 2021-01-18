@@ -1,5 +1,5 @@
-import { EComponentType } from "../enums/componentType.enum";
-import { ComponentStyles } from "./component-styles";
+import { EComponentType } from '../enums/componentType.enum';
+import { ComponentStyles } from './component-styles';
 
 export interface UIComponent {
     id: number;

@@ -1,18 +1,17 @@
-import {ActionReducerMap, createSelector, MetaReducer} from '@ngrx/store';
-import {environment} from '../../../environments/environment';
-import {ComponentStyles} from '../../shared/models/component-styles';
-import {Actions, ActionTypes} from '../actions/actions';
-import {ESection} from '../../shared/enums/section.enum';
-import {EComponentType} from '../../shared/enums/componentType.enum';
+import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
+
+import { environment } from '../../../environments/environment';
+import { ActionTypes } from '../actions/actions';
+import { ESection } from '../../shared/enums/section.enum';
+import { EComponentType } from '../../shared/enums/componentType.enum';
 import { GeneralStyles } from '../../shared/models/general-styles.model';
-import {Action} from 'rxjs/internal/scheduler/Action';
-import { ComponentPortal } from '@angular/cdk/portal';
 import { UIComponent } from 'src/app/shared/models/component.model';
 
 
 export interface ComponentState {
   components: UIComponent[];
   dragComponent: EComponentType | null;
+  selectedComponent: UIComponent | null;
   isDragging: boolean;
   section: ESection | null;
   generalStyles: GeneralStyles;
@@ -21,6 +20,7 @@ export interface ComponentState {
 const initialState: ComponentState = {
   components: [],
   dragComponent: null,
+  selectedComponent: null,
   isDragging: false,
   section: null,
   generalStyles: {
@@ -50,7 +50,7 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       };
     case ActionTypes.AddComponent:
       return  {
-        ...state, components: [...state.components, action.payload]
+        ...state, components: [...state.components, action.payload], selectedComponent: action.payload
       };
     case ActionTypes.StartDragging:
       return {
@@ -67,6 +67,10 @@ export function componentsReducer(state: ComponentState = initialState, action: 
     case ActionTypes.UpdateGeneralStyles:
       return  {
         ...state, generalStyles: action.payload
+      };
+    case ActionTypes.SelectComponent:
+      return  {
+        ...state, selectedComponent: action.payload
       };
     default:
       return state;
@@ -89,7 +93,7 @@ export const getComponentById = (id: number) => createSelector(getComponents, (a
 });
 export const getIsDragging = (state: AppState) => state.componentsState.isDragging;
 export const getSection = (state: AppState) => state.componentsState.section;
-export const getDragComponent = (state: AppState) => state.componentsState.dragComponent;
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;
+export const getSelectedComponent = (state: AppState) => state.componentsState.selectedComponent;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

@@ -1,15 +1,16 @@
 import { Component, ComponentRef, InjectionToken, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkPortalOutletAttachedRef, ComponentPortal } from '@angular/cdk/portal';
+
 import { EComponentType } from '../shared/enums/componentType.enum';
-import {Store} from '@ngrx/store';
-import {ComponentState} from '../store/reducers';
-import {EndDragging, StartDragging} from '../store/actions/actions';
-import { CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ComponentState } from '../store/reducers';
+import { EndDragging } from '../store/actions/actions';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { CheckboxComponent } from '../shared/components/checkbox/checkbox.component';
 import { InputComponent } from '../shared/components/input/input.component';
 import { SelectComponent } from '../shared/components/select/select.component';
 import { TextareaComponent } from '../shared/components/textarea/textarea.component';
-import { CdkPortalOutletAttachedRef, ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-templates-section',
@@ -20,27 +21,25 @@ import { CdkPortalOutletAttachedRef, ComponentPortal, PortalInjector } from '@an
 
 export class TemplatesSectionComponent implements OnInit {
 
-  foo(ref: CdkPortalOutletAttachedRef) {
-    ref = ref as ComponentRef<any>;
-    ref.instance.isTemplate = true;
-  }
-
   ComponentType = EComponentType;
   templateComponents: ComponentPortal<any>[] = [
     new ComponentPortal(ButtonComponent),
     new ComponentPortal(CheckboxComponent),
     new ComponentPortal(InputComponent),
     new ComponentPortal(SelectComponent),
-    new ComponentPortal(TextareaComponent) 
-  ]
+    new ComponentPortal(TextareaComponent)
+  ];
+
+  foo(ref: CdkPortalOutletAttachedRef): void {
+    ref = ref as ComponentRef<any>;
+    ref.instance.isTemplate = true;
+  }
 
   constructor(private store: Store<ComponentState>) { }
 
   ngOnInit(): void {
 
   }
-
-  
 
   dragEnd(event: any): void {
     this.store.dispatch(new EndDragging());

@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-
-import { ComponentStyles } from '../../models/component-styles';
-import {Store} from '@ngrx/store';
-import {AppState, getComponentById} from '../../../store/reducers';
-import {AddComponent} from '../../../store/actions/actions';
-import { IdService } from '../../services/id.service';
-import { EComponentType } from '../../enums/componentType.enum';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { ComponentStyles } from '../../models/component-styles';
+import { AppState, getComponentById } from '../../../store/reducers';
+import { AddComponent, SelectComponentAction } from '../../../store/actions/actions';
+import { IdService } from '../../services/id.service';
+import { EComponentType } from '../../enums/componentType.enum';
 
 @Component({
   selector: 'app-input',
@@ -16,10 +16,10 @@ import { map } from 'rxjs/operators';
 })
 export class InputComponent implements OnInit {
 
-  styles$: Observable<ComponentStyles>;
+  styles$: Observable<ComponentStyles> | undefined;
   styles: ComponentStyles = {
     placeholder: 'Input',
-    width: 70,
+    width: 240,
     height: 36,
     required: true,
     fontSize: 18,
@@ -31,10 +31,18 @@ export class InputComponent implements OnInit {
     borderColor: '#000'
   };
 
-  @Input() isTemplate: boolean = false;
+  @Input() isTemplate: boolean | undefined;
   ComponentType = EComponentType.Input;
   id: number | undefined;
-  name: string | undefined
+  name: string | undefined;
+
+  @HostListener('click', ['$event'])
+  onClick(): void {
+    if (this.isTemplate) {
+      return;
+    }
+    this.store.dispatch(new SelectComponentAction({ id: this.id as number, name: this.name as string, componentType: this.ComponentType, styles: this.styles }));
+  }
 
   constructor(private IdService: IdService, private store: Store<AppState>) { }
 
@@ -42,8 +50,8 @@ export class InputComponent implements OnInit {
     this.componentInit();
   }
 
-  componentInit() {
-    if(this.isTemplate) {
+  componentInit(): void {
+    if (this.isTemplate) {
       return;
     }
     this.id = this.IdService.getId();
