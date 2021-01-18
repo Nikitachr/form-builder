@@ -9,4 +9,9 @@
       margin-right: 10px;
     }
   }
+  &__left {
+    &--auto {
+      margin-left: auto;
+    }
+  }
 }
