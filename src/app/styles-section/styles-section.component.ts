@@ -6,6 +6,7 @@ import { delay } from 'rxjs/operators';
 import { AppState, getComponents, getSelectedComponent } from '../store/reducers';
 import { UIComponent } from '../shared/models/component.model';
 import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {SelectComponentAction} from '../store/actions/actions';
 
 @Component({
   selector: 'app-styles-section',
@@ -24,6 +25,10 @@ export class StylesSectionComponent implements OnInit {
     this.components$ = this.store.select(getComponents).pipe(delay(0));
     // @ts-ignore
     this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
+  }
+
+  onExpand(component: UIComponent): void {
+    this.store.dispatch(new SelectComponentAction(component.id));
   }
 
   identify(index: any, item: any): number{
