@@ -13,7 +13,6 @@ import { ESection } from './shared/enums/section.enum';
 })
 export class AppComponent implements OnInit{
   title = 'form-builder';
-
   Section = ESection;
 
   constructor(private store: Store<AppState>) {

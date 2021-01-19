@@ -22,13 +22,31 @@ import {LabelComponent} from '../shared/components/label/label.component';
 export class TemplatesSectionComponent implements OnInit {
 
   ComponentType = EComponentType;
-  templateComponents: ComponentPortal<any>[] = [
-    new ComponentPortal(ButtonComponent),
-    new ComponentPortal(CheckboxComponent),
-    new ComponentPortal(InputComponent),
-    new ComponentPortal(SelectComponent),
-    new ComponentPortal(TextareaComponent),
-    new ComponentPortal(LabelComponent)
+  templateComponents: any[] = [
+    {
+      id: null,
+      component: new ComponentPortal(ButtonComponent)
+    },
+    {
+      id: null,
+      component: new ComponentPortal(CheckboxComponent)
+    },
+    {
+      id: null,
+      component: new ComponentPortal(InputComponent)
+    },
+    {
+      id: null,
+      component: new ComponentPortal(SelectComponent)
+    },
+    {
+      id: null,
+      component: new ComponentPortal(TextareaComponent)
+    },
+    {
+      id: null,
+      component: new ComponentPortal(LabelComponent)
+    },
   ];
 
   foo(ref: CdkPortalOutletAttachedRef): void {
