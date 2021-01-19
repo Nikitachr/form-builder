@@ -14,8 +14,8 @@ import { UpdateGeneralStyles } from '../../../store/actions/actions';
 })
 export class GeneralStylesComponent implements OnInit {
 
-  generalStyles$: Observable<GeneralStyles> | undefined;
-  generalStyles: GeneralStyles | undefined;
+  generalStyles$?: Observable<GeneralStyles>;
+  generalStyles?: GeneralStyles ;
 
   form: FormGroup | undefined;
 

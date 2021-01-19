@@ -9,7 +9,7 @@
   </div>
   <div class="d__flex d__flex--items-center m__top--10">
     <span class="m__right--10">Background color</span>
-    <input class="color" [colorPicker]="form.get('backgroundColor').value" [style.background]="form.get('backgroundColor').value" (colorPickerChange)="colorChange($event)">
+    <input class="color" [colorPicker]="form?.get('backgroundColor')?.value" [style.background]="form?.get('backgroundColor')?.value" (colorPickerChange)="colorChange($event)">
   </div>
   <div class="d__flex d__flex--items-center m__top--10">
     <span class="m__right--10">Margins between components</span>

@@ -26,7 +26,7 @@ export class ComponentStylesComponent implements OnInit {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
-  @Input() component: UIComponent;
+  @Input() component: UIComponent | undefined;
 
   AlignType = EAlignType;
   ComponentType = EComponentType;

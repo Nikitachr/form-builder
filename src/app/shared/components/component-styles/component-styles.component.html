@@ -2,33 +2,33 @@
   <div class="spacing-section">
     <p>Spacing</p>
 
-    <div *ngIf="component.styles.width" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.width" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Width</span>
       <input class="input m__left--auto" type="text" formControlName="width">
     </div>
 
-    <div *ngIf="component.styles.height" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.height" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Height</span>
       <input class="input m__left--auto" type="text" formControlName="height">
     </div>
 
-    <div *ngIf="component.styles.paddingTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.paddingTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Padding top and bottom</span>
       <input class="input m__left--auto" type="text" formControlName="paddingTop">
     </div>
 
-    <div *ngIf="component.styles.paddingLeft" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.paddingLeft" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Padding left and right</span>
       <input class="input m__left--auto" type="text" formControlName="paddingLeft">
     </div>
 
 
-    <div *ngIf="component.styles.marginTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.marginTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Margin top</span>
       <input class="input m__left--auto" type="text" formControlName="marginTop">
     </div>
 
-    <div *ngIf="component.styles.align" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component?.styles.align" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Align</span>
       <div class="d__flex m__left--auto">
         <button (click)="alignChange(AlignType.Left)">Left</button>
