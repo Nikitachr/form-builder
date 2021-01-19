@@ -26,6 +26,8 @@ import { metaReducers, reducers } from './store/reducers';
 import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
 import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
 import { LabelComponent } from './shared/components/label/label.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { RequestInterceptor } from './shared/interceptors/http.inteceptor';
 
 @NgModule({
   declarations: [
@@ -53,13 +55,18 @@ import { LabelComponent } from './shared/components/label/label.component';
     MatButtonModule,
     MatExpansionModule,
     MatTreeModule,
+    HttpClientModule,
     ColorPickerModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
