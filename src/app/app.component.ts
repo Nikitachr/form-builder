@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ChangeSection } from './store/actions/actions';
-import { AppState, ComponentState } from './store/reducers';
+import { AppState } from './store/reducers';
 import { ESection } from './shared/enums/section.enum';
 
 @Component({

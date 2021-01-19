@@ -1,4 +1,4 @@
-import { Component, ComponentRef, InjectionToken, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ComponentRef, InjectionToken, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CdkPortalOutletAttachedRef, ComponentPortal } from '@angular/cdk/portal';
@@ -15,7 +15,8 @@ import {LabelComponent} from '../shared/components/label/label.component';
 @Component({
   selector: 'app-templates-section',
   templateUrl: './templates-section.component.html',
-  styleUrls: ['./templates-section.component.scss']
+  styleUrls: ['./templates-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 

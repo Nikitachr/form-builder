@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -11,7 +11,8 @@ import {SelectComponentAction} from '../store/actions/actions';
 @Component({
   selector: 'app-styles-section',
   templateUrl: './styles-section.component.html',
-  styleUrls: ['./styles-section.component.scss']
+  styleUrls: ['./styles-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StylesSectionComponent implements OnInit {
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import * as _ from 'lodash';
@@ -20,7 +20,8 @@ interface ExampleFlatNode {
 @Component({
   selector: 'app-component-styles',
   templateUrl: './component-styles.component.html',
-  styleUrls: ['./component-styles.component.scss']
+  styleUrls: ['./component-styles.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentStylesComponent implements OnInit {
 

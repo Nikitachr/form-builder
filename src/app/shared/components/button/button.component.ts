@@ -1,5 +1,5 @@
 /* tslint:disable */
-import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable, ReplaySubject} from 'rxjs';
 import {first, map, takeUntil} from 'rxjs/operators';
@@ -16,7 +16,7 @@ import {EAlignType} from '../../enums/align.enum';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit, OnDestroy {
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ComponentRef, InjectionToken, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ComponentRef, InjectionToken, OnChanges, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
@@ -13,6 +13,7 @@ import {UIComponent} from '../shared/models/component.model';
   selector: 'app-viewport-section',
   templateUrl: './viewport-section.component.html',
   styleUrls: ['./viewport-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewportSectionComponent implements OnInit, AfterViewInit {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +10,8 @@ import { UpdateGeneralStyles } from '../../../store/actions/actions';
 @Component({
   selector: 'app-general-styles',
   templateUrl: './general-styles.component.html',
-  styleUrls: ['./general-styles.component.scss']
+  styleUrls: ['./general-styles.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeneralStylesComponent implements OnInit {
 
