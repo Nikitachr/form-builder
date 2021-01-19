@@ -25,6 +25,7 @@ import { metaReducers, reducers } from './store/reducers';
 import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
 import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
 import { LabelComponent } from './shared/components/label/label.component';
+import { NgLoopDirective } from './shared/directives/custom-ng-for.directive';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { LabelComponent } from './shared/components/label/label.component';
     TextareaComponent,
     SelectComponent,
     GeneralStylesComponent,
-    LabelComponent
+    LabelComponent,
+    NgLoopDirective
   ],
   imports: [
     BrowserModule,

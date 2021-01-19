@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ComponentRef, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ComponentRef, OnChanges, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
@@ -35,10 +35,6 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-  }
-
-  addComponent(component: any): void {
-    this.componentPortal.push(new ComponentPortal(component));
   }
 
   drop(event: CdkDragDrop<string[]>): void {

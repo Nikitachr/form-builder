@@ -8,7 +8,7 @@
     [cdkDropListEnterPredicate]="noReturnPredicate"
     (cdkDropListDropped)="drop($event)"
     >
-    <div class="example-box" *ngFor="let component of templateComponents" cdkDrag>
+    <div class="example-box w__100per d__flex d__flex--direction-column d__flex--items-center" *ngFor="let component of templateComponents" cdkDrag>
       <ng-template [cdkPortalOutlet]="component" (attached)="foo($event)"></ng-template>
     </div>
 </div>

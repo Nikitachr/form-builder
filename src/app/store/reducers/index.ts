@@ -10,7 +10,7 @@ import {ESection} from '../../shared/enums/section.enum';
 
 export interface ComponentState {
   components: UIComponent[];
-  selectedComponent: UIComponent | null;
+  selectedComponent: number | null;
   section: ESection | null;
   generalStyles: GeneralStyles;
 }
@@ -46,7 +46,7 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       };
     case ActionTypes.AddComponent:
       return  {
-        ...state, components: [...state.components, action.payload], selectedComponent: action.payload
+        ...state, components: [...state.components, action.payload], selectedComponent: action.payload.id
       };
     case ActionTypes.ChangeSection:
       return {

@@ -29,12 +29,4 @@ export class StylesSectionComponent implements OnInit {
   identify(index: any, item: any): number{
     return item.id;
   }
-
-  drop(event: CdkDragDrop<string[]>): void {
-    if (event.container.id === event.previousContainer.id) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      event.previousContainer.data = [];
-    }
-  }
 }

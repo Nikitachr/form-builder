@@ -3,6 +3,10 @@
     &--10 {
       margin-top: 10px;
     }
+
+    &--20 {
+      margin-top: 20px;
+    }
   }
   &__right {
     &--10 {
@@ -12,6 +16,10 @@
   &__left {
     &--auto {
       margin-left: auto;
+    }
+
+    &--10 {
+      margin-left: 10px;
     }
   }
 }

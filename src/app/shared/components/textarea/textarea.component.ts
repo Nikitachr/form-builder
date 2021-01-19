@@ -23,6 +23,7 @@ export class TextareaComponent implements OnInit, OnDestroy {
     placeholder: 'Text area',
     width: 300,
     height: 100,
+    marginTop: 5,
     required: true,
     fontSize: 18,
     fontWeight: 400,
@@ -54,6 +55,7 @@ export class TextareaComponent implements OnInit, OnDestroy {
       placeholder: new FormControl('', [Validators.required]),
       width: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       height: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      marginTop: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       required: new FormControl('', [Validators.required]),
       fontSize: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       fontWeight: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
@@ -86,7 +88,7 @@ export class TextareaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
-    this.store.dispatch(new DeleteComponent(this.id));
+    this.store.dispatch(new DeleteComponent(this.id as number));
   }
 
 }

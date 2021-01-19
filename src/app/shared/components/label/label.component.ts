@@ -23,6 +23,7 @@ export class LabelComponent implements OnInit, OnDestroy {
   styles$: Observable<ComponentStyles> | undefined;
   styles: ComponentStyles = {
     placeholder: 'Label',
+    marginTop: 5,
     fontSize: 18,
     fontWeight: 400,
     color: '#000',
@@ -48,6 +49,7 @@ export class LabelComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.editForm = new FormGroup({
       placeholder: new FormControl('', [Validators.required]),
+      marginTop: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       fontSize: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       fontWeight: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       color: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
@@ -76,7 +78,7 @@ export class LabelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
-    this.store.dispatch(new DeleteComponent(this.id));
+    this.store.dispatch(new DeleteComponent(this.id as number));
   }
 
 }
