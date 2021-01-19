@@ -4,6 +4,8 @@ export interface ComponentStyles {
   placeholder?: string;
   width?: number;
   height?: number;
+  paddingLeft?: number;
+  paddingTop?: number;
   marginTop?: number;
   required?: boolean;
   fontSize?: number;

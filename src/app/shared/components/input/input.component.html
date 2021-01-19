@@ -1,6 +1,7 @@
-<input type="text" [placeholder]="styles.placeholder" [ngStyle]="{
+<input type="text" [disabled]="isTemplate" [placeholder]="styles.placeholder" [ngStyle]="{
   'width' : styles.width + 'px',
   'height' : styles.height + 'px',
+  'padding' : styles.paddingTop + 'px ' + styles.paddingLeft + 'px',
   'marginTop' : styles.marginTop + 'px',
   'required' : styles.required,
   'fontSize' : styles.fontSize + 'px',

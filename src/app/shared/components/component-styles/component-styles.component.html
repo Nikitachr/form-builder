@@ -12,6 +12,17 @@
       <input class="input m__left--auto" type="text" formControlName="height">
     </div>
 
+    <div *ngIf="component.styles.paddingTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
+      <span class="m__right--10">Padding top and bottom</span>
+      <input class="input m__left--auto" type="text" formControlName="paddingTop">
+    </div>
+
+    <div *ngIf="component.styles.paddingLeft" class="m__left--10 d__flex d__flex--items-center m__top--10">
+      <span class="m__right--10">Padding left and right</span>
+      <input class="input m__left--auto" type="text" formControlName="paddingLeft">
+    </div>
+
+
     <div *ngIf="component.styles.marginTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Margin top</span>
       <input class="input m__left--auto" type="text" formControlName="marginTop">

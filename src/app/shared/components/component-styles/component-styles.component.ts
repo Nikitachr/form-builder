@@ -9,6 +9,13 @@ import {UIComponent} from '../../models/component.model';
 import {EComponentType} from '../../enums/componentType.enum';
 import {EAlignType} from '../../enums/align.enum';
 import {ReplaySubject} from 'rxjs';
+import {FlatTreeControl} from '@angular/cdk/tree';
+
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
 
 @Component({
   selector: 'app-component-styles',
@@ -19,7 +26,7 @@ export class ComponentStylesComponent implements OnInit {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
-  @Input() component: UIComponent | undefined;
+  @Input() component: UIComponent;
 
   AlignType = EAlignType;
   ComponentType = EComponentType;

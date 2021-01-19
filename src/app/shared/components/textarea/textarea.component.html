@@ -1,6 +1,7 @@
-<textarea [placeholder]="styles.placeholder" [ngStyle]="{
+<textarea [placeholder]="styles.placeholder" [disabled]="isTemplate" [ngStyle]="{
 'width' : styles.width + 'px',
 'height' : styles.height + 'px',
+'padding' : styles.paddingTop + 'px ' + styles.paddingTop + 'px',
 'marginTop': styles.marginTop + 'px',
 'fontSize' : styles.fontSize + 'px',
 'fontWeight' : styles.fontWeight,

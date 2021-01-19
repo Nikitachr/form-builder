@@ -1,5 +1,5 @@
 <div [ngClass]="styles.align" [ngStyle]="{ 'marginTop': styles.marginTop + 'px' }" class="d__flex d__flex--items-center">
-  <input class="m__right--10" type="checkbox" name="checkbox" id="checkbox_id" [ngStyle]="{
+  <input class="m__right--10" type="checkbox" name="checkbox" id="checkbox_id" [disabled]="isTemplate" [ngStyle]="{
   'width' : styles.width + 'px',
   'height' : styles.height + 'px'
   }">

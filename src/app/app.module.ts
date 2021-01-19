@@ -9,6 +9,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTreeModule } from '@angular/material/tree';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 import { ButtonComponent } from './shared/components/button/button.component';
@@ -26,8 +27,6 @@ import { GeneralStylesComponent } from './shared/components/general-styles/gener
 import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
 import { LabelComponent } from './shared/components/label/label.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +40,7 @@ import { LabelComponent } from './shared/components/label/label.component';
     TextareaComponent,
     SelectComponent,
     GeneralStylesComponent,
-    LabelComponent,
+    LabelComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +52,7 @@ import { LabelComponent } from './shared/components/label/label.component';
     StoreModule.forRoot(reducers, {metaReducers}),
     MatButtonModule,
     MatExpansionModule,
+    MatTreeModule,
     ColorPickerModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
