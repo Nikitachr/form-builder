@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import { ChangeSection } from './store/actions/actions';
-import { AppState } from './store/reducers';
-import { ESection } from './shared/enums/section.enum';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from './shared/services/auth.service';
+import {catchError, first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'form-builder';
-  Section = ESection;
 
-  constructor(private store: Store<AppState>) {
-
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
-  }
-
-  enter(section: ESection): void {
-    this.store.dispatch(new ChangeSection(section));
+    if (!localStorage.getItem('token')) {
+      this.authService.login({ email: 'test@gmail.com', password: 'test' })
+        .subscribe(
+          res => localStorage.setItem('token', res.accessToken),
+          // tslint:disable-next-line:max-line-length
+          error =>  this.authService.register({ email: 'test@gmail.com', password: 'test' }).subscribe(res => localStorage.setItem('token', res.accessToken))
+        );
+    }
   }
 }
 

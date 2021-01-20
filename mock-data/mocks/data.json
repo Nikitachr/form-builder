@@ -1,0 +1,18 @@
+{
+  "people": [
+    {
+      "name": "test2"
+    },
+    {
+      "id": 2,
+      "name": "test2"
+    }
+  ],
+  "users": [
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$pnPnq5rsLL80a/rJNEq3d.JyzykIzQZOL0Iv2ygQVXulhtZ7OG2jC",
+      "id": 1
+    }
+  ]
+}

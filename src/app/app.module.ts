@@ -28,6 +28,8 @@ import { ComponentStylesComponent } from './shared/components/component-styles/c
 import { LabelComponent } from './shared/components/label/label.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RequestInterceptor } from './shared/interceptors/http.inteceptor';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -42,12 +44,14 @@ import { RequestInterceptor } from './shared/interceptors/http.inteceptor';
     TextareaComponent,
     SelectComponent,
     GeneralStylesComponent,
-    LabelComponent
+    LabelComponent,
+    FormBuilderComponent
   ],
   imports: [
     BrowserModule,
     ReactiveComponentModule,
     FormsModule,
+    AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule,
     PortalModule,
