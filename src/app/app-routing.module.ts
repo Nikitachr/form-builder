@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FormBuilderComponent} from './form-builder/form-builder.component';
-import { AuthGuard } from './shared/guards/auth.guard';
 
-
+import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: FormBuilderComponent, canActivate: [AuthGuard] },

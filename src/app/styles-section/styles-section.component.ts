@@ -1,12 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { AppState, getComponents, getSelectedComponent } from '../store/reducers';
-import { UIComponent } from '../shared/models/component.model';
-import {CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {SelectComponentAction} from '../store/actions/actions';
+import { AppState, getComponents, getSelectedComponent } from 'src/app/store/reducers';
+import { UIComponent } from 'src/app/shared/models/component.model';
+import { SelectComponentAction } from 'src/app/store/actions/actions';
 
 @Component({
   selector: 'app-styles-section',
@@ -16,15 +15,13 @@ import {SelectComponentAction} from '../store/actions/actions';
 })
 export class StylesSectionComponent implements OnInit {
 
-  selectedComponent$: Observable<number> | undefined;
-  components$: Observable<UIComponent[]> | undefined;
-  array: any[] | undefined;
+  selectedComponent$: Observable<number>;
+  components$: Observable<UIComponent[]>;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.components$ = this.store.select(getComponents).pipe(delay(0));
-    // @ts-ignore
     this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
   }
 
@@ -32,7 +29,7 @@ export class StylesSectionComponent implements OnInit {
     this.store.dispatch(new SelectComponentAction(id));
   }
 
-  identify(index: any, item: any): number{
+  identify(index: number, item: UIComponent): number{
     return item.id;
   }
 }

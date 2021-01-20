@@ -11,25 +11,25 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { ButtonComponent } from './shared/components/button/button.component';
-import { InputComponent } from './shared/components/input/input.component';
-import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
-import { TextareaComponent } from './shared/components/textarea/textarea.component';
-import { SelectComponent } from './shared/components/select/select.component';
-import { AppComponent } from './app.component';
-import { StylesSectionComponent } from './styles-section/styles-section.component';
-import { ViewportSectionComponent } from './viewport-section/viewport-section.component';
-import { TemplatesSectionComponent } from './templates-section/templates-section.component';
-import { environment } from '../environments/environment';
-import { metaReducers, reducers } from './store/reducers';
-import { GeneralStylesComponent } from './shared/components/general-styles/general-styles.component';
-import { ComponentStylesComponent } from './shared/components/component-styles/component-styles.component';
-import { LabelComponent } from './shared/components/label/label.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { RequestInterceptor } from './shared/interceptors/http.inteceptor';
-import { FormBuilderComponent } from './form-builder/form-builder.component';
-import {AppRoutingModule} from './app-routing.module';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { InputComponent } from 'src/app/shared/components/input/input.component';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { TextareaComponent} from 'src/app/shared/components/textarea/textarea.component';
+import { SelectComponent} from 'src/app/shared/components/select/select.component';
+import { AppComponent } from 'src/app/app.component';
+import { StylesSectionComponent } from 'src/app/styles-section/styles-section.component';
+import { ViewportSectionComponent } from 'src/app/viewport-section/viewport-section.component';
+import { TemplatesSectionComponent } from 'src/app/templates-section/templates-section.component';
+import { environment } from 'src/environments/environment';
+import { metaReducers, reducers } from 'src/app/store/reducers';
+import { GeneralStylesComponent } from 'src/app/shared/components/general-styles/general-styles.component';
+import { ComponentStylesComponent } from 'src/app/shared/components/component-styles/component-styles.component';
+import { LabelComponent } from 'src/app/shared/components/label/label.component';
+import { RequestInterceptor } from 'src/app/shared/interceptors/http.inteceptor';
+import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @NgModule({
   declarations: [

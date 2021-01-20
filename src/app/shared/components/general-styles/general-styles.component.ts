@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AppState, getGeneralStyles } from '../../../store/reducers';
-import { GeneralStyles } from '../../models/general-styles.model';
-import { UpdateGeneralStyles } from '../../../store/actions/actions';
+import { AppState, getGeneralStyles } from 'src/app/store/reducers';
+import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
+import { UpdateGeneralStyles } from 'src/app/store/actions/actions';
 
 @Component({
   selector: 'app-general-styles',

@@ -1,4 +1,4 @@
-import { EAlignType } from '../enums/align.enum';
+import { EAlignType } from 'src/app/shared/enums/align.enum';
 
 export interface ComponentStyles {
   placeholder?: string;

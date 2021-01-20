@@ -1,27 +1,22 @@
-import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {Observable, ReplaySubject} from 'rxjs';
-import {first, map, takeUntil} from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ComponentStyles } from '../../models/component-styles';
-import { AppState, getComponentById } from '../../../store/reducers';
-import {AddComponent, DeleteComponent, SelectComponentAction} from '../../../store/actions/actions';
-import { ComponentService } from '../../services/component.service';
-import { EComponentType } from '../../enums/componentType.enum';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ValidatorService} from '../../services/validator.service';
+import { ComponentStyles } from 'src/app/shared/models/component-styles';
+import { AppState } from 'src/app/store/reducers';
+import { ComponentService } from 'src/app/shared/services/component.service';
+import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { ValidatorService } from 'src/app/shared/services/validator.service';
+import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent implements OnInit, OnDestroy {
+export class InputComponent extends BaseUiComponent{
 
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-
-  styles$: Observable<ComponentStyles> | undefined;
-  styles: ComponentStyles = {
+  styles = {
     width: 300,
     placeholder: 'Input',
     height: 36,
@@ -38,21 +33,7 @@ export class InputComponent implements OnInit, OnDestroy {
     borderColor: '#000'
   };
 
-  @Input() isTemplate: boolean | undefined;
   ComponentType = EComponentType.Input;
-  id: number | undefined;
-  name: string | undefined;
-  editForm: FormGroup | undefined;
-
-  @HostListener('click', ['$event'])
-  onClick(): void {
-    if (this.isTemplate) {
-      return;
-    }
-    this.store.dispatch(new SelectComponentAction(this.id as number));
-  }
-
-  constructor(private idService: ComponentService, private store: Store<AppState>, private validatorService: ValidatorService) { }
 
   initForm(): void {
     this.editForm = new FormGroup({
@@ -73,28 +54,16 @@ export class InputComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-    this.initForm();
-    this.componentInit();
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
-  componentInit(): void {
-    if (this.isTemplate) {
-      return;
-    }
-    this.id = this.idService.getId();
-    this.idService.getName(this.ComponentType).pipe(first()).subscribe(res => this.name = res);
-    this.store.dispatch(new AddComponent({ id: this.id, name: this.name as string, componentType: this.ComponentType, styles: this.styles, editForm: this.editForm as FormGroup }));
-    this.styles$ = this.store.select(getComponentById(this.id)).pipe(
-      takeUntil(this.destroyed$),
-      map((component: any) => component.styles));
-    this.styles$.subscribe(styles => this.styles = styles);
+  ngOnInit(): void {
+    super.ngOnInit();
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
-    this.store.dispatch(new DeleteComponent(this.id as number));
+    super.ngOnDestroy();
   }
 
 }

@@ -1,21 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 
-import {UpdateComponent} from 'src/app/store/actions/actions';
-import {AppState} from 'src/app/store/reducers';
-import {UIComponent} from '../../models/component.model';
-import {EComponentType} from '../../enums/componentType.enum';
-import {EAlignType} from '../../enums/align.enum';
-import {ReplaySubject} from 'rxjs';
-import {FlatTreeControl} from '@angular/cdk/tree';
-
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-}
+import { UpdateComponent } from 'src/app/store/actions/actions';
+import { AppState } from 'src/app/store/reducers';
+import { UIComponent } from 'src/app/shared/models/component.model';
+import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { EAlignType } from 'src/app/shared/enums/align.enum';
 
 @Component({
   selector: 'app-component-styles',
@@ -25,9 +17,7 @@ interface ExampleFlatNode {
 })
 export class ComponentStylesComponent implements OnInit {
 
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-
-  @Input() component: UIComponent | undefined;
+  @Input() component: UIComponent;
 
   AlignType = EAlignType;
   ComponentType = EComponentType;
@@ -37,7 +27,7 @@ export class ComponentStylesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.form?.patchValue(this.component?.styles as UIComponent);
+    this.form?.patchValue(this.component?.styles);
     this.form?.valueChanges.subscribe(() => this.updateStyles());
   }
 
@@ -50,7 +40,7 @@ export class ComponentStylesComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(new UpdateComponent({...this.component as UIComponent, styles: this.form?.value}));
+    this.store.dispatch(new UpdateComponent({...this.component, styles: this.form?.value}));
   }
 
   colorChange(color: string, field: string): void {

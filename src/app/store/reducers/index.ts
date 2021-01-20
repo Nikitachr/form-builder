@@ -1,12 +1,11 @@
 import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
 
-import { environment } from '../../../environments/environment';
-import { ActionTypes } from '../actions/actions';
-import { EComponentType } from '../../shared/enums/componentType.enum';
-import { GeneralStyles } from '../../shared/models/general-styles.model';
+import { environment } from 'src/environments/environment';
+import { Actions, ActionTypes } from 'src/app/store/actions/actions';
+import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
-import {ESection} from '../../shared/enums/section.enum';
-
+import { ESection } from 'src/app/shared/enums/section.enum';
 
 export interface ComponentState {
   components: UIComponent[];
@@ -31,12 +30,8 @@ export interface AppState {
   componentsState: ComponentState;
 }
 
-export function componentsReducer(state: ComponentState = initialState, action: any): ComponentState {
+export function componentsReducer(state: ComponentState = initialState, action: Actions): ComponentState {
   switch (action.type) {
-    case ActionTypes.LoadComponents:
-      return {
-        ...state, components: action.payload
-      };
     case ActionTypes.UpdateComponent:
       const newArr = [...state.components];
       const index = state.components.findIndex(el => el.id === action.payload.id);
@@ -85,12 +80,8 @@ export const getComponentById = (id: number) => createSelector(getComponents, (a
   }
 });
 
-export const getComponentByType = (type: EComponentType) => createSelector(getComponents, (allItems) => {
-  if (allItems) {
-    return allItems.filter(item => item.componentType === type);
-  } else {
-    return {};
-  }
+export const getComponentByType = (type: EComponentType) => createSelector(getComponents, (allItems): UIComponent[] | {} => {
+  return  allItems ? allItems.filter(item => item.componentType === type) : {};
 });
 
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;

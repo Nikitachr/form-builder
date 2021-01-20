@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from './shared/services/auth.service';
-import {catchError, first} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +16,9 @@ export class AppComponent implements OnInit {
     if (!localStorage.getItem('token')) {
       this.authService.login({ email: 'test@gmail.com', password: 'test' })
         .subscribe(
-          res => localStorage.setItem('token', res.accessToken),
+          ({ accessToken }) => localStorage.setItem('token', accessToken),
           // tslint:disable-next-line:max-line-length
-          error =>  this.authService.register({ email: 'test@gmail.com', password: 'test' }).subscribe(res => localStorage.setItem('token', res.accessToken))
+          error =>  this.authService.register({ email: 'test@gmail.com', password: 'test' }).subscribe((res) => localStorage.setItem('token', res.accessToken))
         );
     }
   }

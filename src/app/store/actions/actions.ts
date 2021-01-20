@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-import { ComponentStyles } from '../../shared/models/component-styles';
-import { GeneralStyles } from '../../shared/models/general-styles.model';
+import { ComponentStyles } from 'src/app/shared/models/component-styles';
+import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
-import {ESection} from '../../shared/enums/section.enum';
+import { ESection } from 'src/app/shared/enums/section.enum';
 
 export enum ActionTypes {
   LoadComponents = '[Components] Load components',

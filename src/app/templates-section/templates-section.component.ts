@@ -1,16 +1,16 @@
-import {ChangeDetectionStrategy, Component, ComponentRef, InjectionToken, OnInit} from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, ComponentRef } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CdkPortalOutletAttachedRef, ComponentPortal } from '@angular/cdk/portal';
 
-import { EComponentType } from '../shared/enums/componentType.enum';
-import { ComponentState } from '../store/reducers';
-import { ButtonComponent } from '../shared/components/button/button.component';
-import { CheckboxComponent } from '../shared/components/checkbox/checkbox.component';
-import { InputComponent } from '../shared/components/input/input.component';
-import { SelectComponent } from '../shared/components/select/select.component';
-import { TextareaComponent } from '../shared/components/textarea/textarea.component';
-import {LabelComponent} from '../shared/components/label/label.component';
+import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { InputComponent } from 'src/app/shared/components/input/input.component';
+import { SelectComponent } from 'src/app/shared/components/select/select.component';
+import { TextareaComponent } from 'src/app/shared/components/textarea/textarea.component';
+import { LabelComponent } from 'src/app/shared/components/label/label.component';
+import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
+import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-templates-section',
@@ -19,11 +19,10 @@ import {LabelComponent} from '../shared/components/label/label.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-
-export class TemplatesSectionComponent implements OnInit {
+export class TemplatesSectionComponent {
 
   ComponentType = EComponentType;
-  templateComponents: any[] = [
+  templateComponents: ViewComponent[] = [
     {
       id: null,
       component: new ComponentPortal(ButtonComponent)
@@ -51,17 +50,13 @@ export class TemplatesSectionComponent implements OnInit {
   ];
 
   foo(ref: CdkPortalOutletAttachedRef): void {
-    ref = ref as ComponentRef<any>;
+    ref = ref as ComponentRef<BaseUiComponent>;
     ref.instance.isTemplate = true;
   }
 
-  constructor(private store: Store<ComponentState>) { }
+  constructor() { }
 
-  ngOnInit(): void {
-
-  }
-
-  drop(event: CdkDragDrop<string[]>): void {
+  drop(event: CdkDragDrop<ViewComponent[]>): void {
     if (event.container.id === event.previousContainer.id) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

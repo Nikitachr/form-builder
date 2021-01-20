@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,14 @@ export class ValidatorService {
   constructor() { }
 
   public numberValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
       const result = new RegExp(this.numberPattern).test(control.value);
       return result ? null : { numberInvalid: true };
     };
   }
 
   public colorValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
       const result = new RegExp(this.colorPattern).test(control.value);
       return result ? null : { colorInvalid: true };
     };

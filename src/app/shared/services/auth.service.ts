@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
+
+import { User } from 'src/app/shared/models/user.model';
+import { AuthResponse } from 'src/app/shared/models/authResponse.model';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -13,11 +15,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public register(user: User): Observable<any>{
-    return this.http.post(`${BASE_URL}/users/register`, user);
+  public register(user: User): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(`${BASE_URL}/users/register`, user);
   }
 
-  public login(user: User): Observable<any>{
-    return this.http.post(`${BASE_URL}/login`, user);
+  public login(user: User): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(`${BASE_URL}/login`, user);
   }
 }

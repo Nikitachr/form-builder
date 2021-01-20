@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {AuthService} from './shared/services/auth.service';
+import {HttpClient} from '@angular/common/http';
 
 describe('AppComponent', () => {
+
+  const authServiceStub = { message: 'Out of service' };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: AuthService, useValue: authServiceStub }
+      ]
     }).compileComponents();
   });
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ESection} from '../shared/enums/section.enum';
-import {Store} from '@ngrx/store';
-import {AppState} from '../store/reducers';
-import {ChangeSection} from '../store/actions/actions';
-import {AuthService} from '../shared/services/auth.service';
+import { Store } from '@ngrx/store';
+
+import { ESection } from 'src/app/shared/enums/section.enum';
+import { AppState } from 'src/app/store/reducers';
+import { ChangeSection } from 'src/app/store/actions/actions';
 
 @Component({
   selector: 'app-form-builder',
@@ -13,8 +13,7 @@ import {AuthService} from '../shared/services/auth.service';
 export class FormBuilderComponent implements OnInit {
   Section = ESection;
 
-  constructor(private store: Store<AppState>, private authService: AuthService) {
-  //this.authService.login({ email: 'test@gmail.com', password: 'test' }).subscribe(res => localStorage.setItem('token', res.accessToken));
+  constructor(private store: Store<AppState>) {
 
   }
 

@@ -1,32 +1,32 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ComponentRef, InjectionToken, OnChanges, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import {CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
-import {CdkDragDrop, copyArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Component, ComponentRef, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
+import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import {AppState, getComponents, getGeneralStyles, getSection} from '../store/reducers';
-import {GeneralStyles} from '../shared/models/general-styles.model';
-import {ESection} from '../shared/enums/section.enum';
-import {UIComponent} from '../shared/models/component.model';
+import { AppState, getGeneralStyles, getSection } from 'src/app/store/reducers';
+import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
+import { ESection } from 'src/app/shared/enums/section.enum';
+import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
+import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-viewport-section',
   templateUrl: './viewport-section.component.html',
   styleUrls: ['./viewport-section.component.scss']
 })
-export class ViewportSectionComponent implements OnInit, AfterViewInit {
+export class ViewportSectionComponent implements OnInit {
 
-  section: ESection | undefined;
-  section$: Observable<ESection> | undefined;
-  components: any[] = [];
+  section: ESection;
+  section$: Observable<ESection>;
+  components: ViewComponent[] = [];
   id = 0;
-  generalStyles$: Observable<GeneralStyles> | undefined;
+  generalStyles$: Observable<GeneralStyles>;
 
   foo(ref: CdkPortalOutletAttachedRef): void {
-    ref = ref as ComponentRef<any>;
+    ref = ref as ComponentRef<BaseUiComponent>;
     ref.instance.isTemplate = false;
   }
-
 
   constructor(private store: Store<AppState>) { }
 
@@ -36,10 +36,7 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
     this.section$.subscribe(res => this.section = res);
   }
 
-  ngAfterViewInit(): void {
-  }
-
-  drop(event: CdkDragDrop<string[]>): void {
+  drop(event: CdkDragDrop<ViewComponent[]>): void {
     if (event.container.id === event.previousContainer.id) {
       if (!event.isPointerOverContainer) {
         this.components.splice(event.previousIndex, 1);
@@ -51,7 +48,7 @@ export class ViewportSectionComponent implements OnInit, AfterViewInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      this.components[event.currentIndex] = { ...this.components[event.currentIndex], id: ++this.id};
+      this.components[event.currentIndex] = { ...this.components[event.currentIndex], id: ++this.id };
     }
   }
 
