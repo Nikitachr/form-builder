@@ -11,6 +11,7 @@ import {ComponentStyles} from '../../models/component-styles';
 import {ComponentService} from '../../services/component.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EAlignType} from '../../enums/align.enum';
+import {ValidatorService} from '../../services/validator.service';
 
 
 @Component({
@@ -56,22 +57,22 @@ export class ButtonComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.editForm = new FormGroup({
       placeholder: new FormControl('', [Validators.required]),
-      width: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      height: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      marginTop: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      width: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      height: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      marginTop: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       required: new FormControl('', [Validators.required]),
-      fontSize: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      fontWeight: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      color: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
-      bgColor: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
-      borderRadius: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      borderWidth: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      borderColor: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
+      fontSize: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      fontWeight: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      color: new FormControl('', [Validators.required, this.validatorService.colorValidator()]),
+      bgColor: new FormControl('', [Validators.required, this.validatorService.colorValidator()]),
+      borderRadius: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      borderWidth: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      borderColor: new FormControl('', [Validators.required, this.validatorService.colorValidator()]),
       align: new FormControl('', [Validators.required])
     });
   }
 
-  constructor(private idService: ComponentService, private store: Store<AppState>) { }
+  constructor(private idService: ComponentService, private store: Store<AppState>, private validatorService: ValidatorService) { }
 
   ngOnInit(): void {
     this.initForm();

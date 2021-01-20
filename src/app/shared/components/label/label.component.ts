@@ -10,6 +10,7 @@ import {ComponentService} from '../../services/component.service';
 import {EComponentType} from '../../enums/componentType.enum';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EAlignType} from '../../enums/align.enum';
+import {ValidatorService} from '../../services/validator.service';
 
 @Component({
   selector: 'app-label',
@@ -44,15 +45,15 @@ export class LabelComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SelectComponentAction(this.id as number));
   }
 
-  constructor(private idService: ComponentService, private store: Store<AppState>) { }
+  constructor(private idService: ComponentService, private store: Store<AppState>, private validatorService: ValidatorService) { }
 
   initForm(): void {
     this.editForm = new FormGroup({
       placeholder: new FormControl('', [Validators.required]),
-      marginTop: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      fontSize: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      fontWeight: new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      color: new FormControl('', [Validators.required, Validators.pattern(/^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/)]),
+      marginTop: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      fontSize: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      fontWeight: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      color: new FormControl('', [Validators.required, this.validatorService.colorValidator()]),
       align: new FormControl('', [Validators.required])
     });
   }
