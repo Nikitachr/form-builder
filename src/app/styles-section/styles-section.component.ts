@@ -28,8 +28,8 @@ export class StylesSectionComponent implements OnInit {
     this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
   }
 
-  onExpand(component: UIComponent): void {
-    this.store.dispatch(new SelectComponentAction(component.id));
+  onExpand(id: number): void {
+    this.store.dispatch(new SelectComponentAction(id));
   }
 
   identify(index: any, item: any): number{

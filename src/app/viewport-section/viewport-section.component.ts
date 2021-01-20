@@ -12,8 +12,7 @@ import {UIComponent} from '../shared/models/component.model';
 @Component({
   selector: 'app-viewport-section',
   templateUrl: './viewport-section.component.html',
-  styleUrls: ['./viewport-section.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./viewport-section.component.scss']
 })
 export class ViewportSectionComponent implements OnInit, AfterViewInit {
 
