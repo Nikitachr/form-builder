@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 import { GeneralStylesComponent } from 'src/app/shared/components/general-styles/general-styles.component';
 
-describe('Test Button Component', () => {
+describe('Test general styles component', () => {
   let component: GeneralStylesComponent;
   let fixture: ComponentFixture<GeneralStylesComponent>;
 

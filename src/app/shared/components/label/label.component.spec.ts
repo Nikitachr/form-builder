@@ -9,7 +9,7 @@ import Spy = jasmine.Spy;
 import { EAlignType } from 'src/app/shared/enums/align.enum';
 import { LabelComponent } from 'src/app/shared/components/label/label.component';
 
-describe('Test Button Component', () => {
+describe('Test Label Component', () => {
   let component: LabelComponent;
   let fixture: ComponentFixture<LabelComponent>;
   let componentService: ComponentService;

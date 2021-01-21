@@ -6,10 +6,9 @@ import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
-import { EAlignType } from 'src/app/shared/enums/align.enum';
 import { InputComponent } from 'src/app/shared/components/input/input.component';
 
-describe('Test Button Component', () => {
+describe('Test Input Component', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
   let componentService: ComponentService;

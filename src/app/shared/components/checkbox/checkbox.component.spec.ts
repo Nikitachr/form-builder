@@ -9,7 +9,7 @@ import Spy = jasmine.Spy;
 import { EAlignType } from 'src/app/shared/enums/align.enum';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 
-describe('Test Button Component', () => {
+describe('Test Checkbox Component', () => {
   let component: CheckboxComponent;
   let fixture: ComponentFixture<CheckboxComponent>;
   let componentService: ComponentService;

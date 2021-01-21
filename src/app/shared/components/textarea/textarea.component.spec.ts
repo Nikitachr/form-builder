@@ -6,10 +6,9 @@ import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
-import { EAlignType } from 'src/app/shared/enums/align.enum';
 import { TextareaComponent } from 'src/app/shared/components/textarea/textarea.component';
 
-describe('Test Button Component', () => {
+describe('Test Textarea Component', () => {
   let component: TextareaComponent;
   let fixture: ComponentFixture<TextareaComponent>;
   let componentService: ComponentService;

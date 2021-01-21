@@ -1,10 +1,10 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {Store} from '@ngrx/store';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import {ComponentStylesComponent} from 'src/app/shared/components/component-styles/component-styles.component';
-import {EComponentType} from 'src/app/shared/enums/componentType.enum';
-import {EAlignType} from 'src/app/shared/enums/align.enum';
+import { ComponentStylesComponent } from 'src/app/shared/components/component-styles/component-styles.component';
+import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { EAlignType } from 'src/app/shared/enums/align.enum';
 
 describe('Test component styles component', () => {
   let component: ComponentStylesComponent;
