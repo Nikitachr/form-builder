@@ -67,7 +67,9 @@ export abstract class BaseUiComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
-    this.store.dispatch(new DeleteComponent(this.id));
+    if (!this.isTemplate) {
+      this.store.dispatch(new DeleteComponent(this.id));
+    }
   }
 
 }

@@ -13,6 +13,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.auth();
+  }
+
+  auth(): void {
     if (!localStorage.getItem('token')) {
       this.authService.login({ email: 'test@gmail.com', password: 'test' })
         .subscribe(

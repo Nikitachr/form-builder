@@ -40,7 +40,7 @@ export class ComponentStylesComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(new UpdateComponent({...this.component, styles: this.form?.value}));
+    this.store.dispatch(new UpdateComponent({ ...this.component, styles: this.form?.value }));
   }
 
   colorChange(color: string, field: string): void {
