@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UpdateGeneralStyles } from 'src/app/store/actions/actions';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-general-styles',
@@ -16,17 +17,15 @@ import { UpdateGeneralStyles } from 'src/app/store/actions/actions';
 export class GeneralStylesComponent implements OnInit {
 
   generalStyles$?: Observable<GeneralStyles>;
-  generalStyles?: GeneralStyles;
 
   form: FormGroup | undefined;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.generalStyles$ = this.store.select(getGeneralStyles);
-    this.generalStyles$.subscribe(res => this.generalStyles = res);
     this.initForm();
-    this.form?.patchValue(this.generalStyles as GeneralStyles);
+    this.generalStyles$ = this.store.select(getGeneralStyles);
+    this.generalStyles$.pipe(first()).subscribe(res =>  this.form?.patchValue(res));
     this.form?.valueChanges.subscribe(() => this.updateStyles());
   }
 

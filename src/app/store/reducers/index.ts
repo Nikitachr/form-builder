@@ -10,14 +10,12 @@ import { ESection } from 'src/app/shared/enums/section.enum';
 export interface ComponentState {
   components: UIComponent[];
   selectedComponent: number | null;
-  section: ESection | null;
   generalStyles: GeneralStyles;
 }
 
 const initialState: ComponentState = {
   components: [],
   selectedComponent: null,
-  section: null,
   generalStyles: {
     margins: 10,
     paddingTop: 20,
@@ -42,10 +40,6 @@ export function componentsReducer(state: ComponentState = initialState, action: 
     case ActionTypes.AddComponent:
       return  {
         ...state, components: [...state.components, action.payload], selectedComponent: action.payload.id
-      };
-    case ActionTypes.ChangeSection:
-      return {
-        ...state, section: action.payload
       };
     case ActionTypes.UpdateGeneralStyles:
       return  {
@@ -86,6 +80,5 @@ export const getComponentByType = (type: EComponentType) => createSelector(getCo
 
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;
 export const getSelectedComponent = (state: AppState) => state.componentsState.selectedComponent;
-export const getSection = (state: AppState) => state.componentsState.section;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];
