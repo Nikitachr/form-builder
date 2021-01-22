@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -39,8 +39,8 @@ export class LabelComponent extends BaseUiComponent implements OnInit, OnDestroy
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
-    super(idService, store, validatorService, cd);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
   ngOnInit(): void {

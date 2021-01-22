@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
@@ -60,8 +60,8 @@ export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDest
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
-    super(idService, store, validatorService, cd);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
   ngOnInit(): void {

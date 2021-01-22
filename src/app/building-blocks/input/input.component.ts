@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
@@ -61,8 +61,8 @@ export class InputComponent extends BaseUiComponent implements ControlValueAcces
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
-    super(idService, store, validatorService, cd);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
   ngOnInit(): void {

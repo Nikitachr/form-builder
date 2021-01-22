@@ -53,8 +53,8 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
-    super(idService, store, validatorService, cd);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
   ngOnInit(): void {

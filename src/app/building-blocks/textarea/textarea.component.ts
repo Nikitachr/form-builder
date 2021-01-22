@@ -61,8 +61,8 @@ export class TextareaComponent extends BaseUiComponent implements OnInit, OnDest
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
-    super(idService, store, validatorService, cd);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(idService, store, validatorService);
   }
 
   ngOnInit(): void {
