@@ -1,6 +1,6 @@
-import { Component, HostListener, Input,  OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { first, map, takeUntil } from 'rxjs/operators';
+import {delay, first, map, takeUntil, tap} from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -36,7 +36,7 @@ export abstract class BaseUiComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SelectComponentAction(this.index));
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) { }
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) { }
 
   abstract initForm(): void;
 
@@ -59,7 +59,8 @@ export abstract class BaseUiComponent implements OnInit, OnDestroy {
     }));
     this.styles$ = this.store.select(getComponentById(this.index)).pipe(
       takeUntil(this.destroyed$),
-      map((component: UIComponent) => component.styles));
+      map((component: UIComponent) => component.styles)
+    );
     this.styles$.subscribe(styles => this.styles = styles);
   }
 

@@ -1,4 +1,4 @@
-<input type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [placeholder]="styles.placeholder" [ngStyle]="{
+<input *ngrxLet="styles$" type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [placeholder]="styles.placeholder" [ngStyle]="{
   'width' : styles.width + 'px',
   'height' : styles.height + 'px',
   'padding' : styles.paddingTop + 'px ' + styles.paddingLeft + 'px',

@@ -1,4 +1,4 @@
-<textarea [(ngModel)]="value" (ngModelChange)="onChange($event)" [placeholder]="styles.placeholder" [disabled]="isTemplate" [ngStyle]="{
+<textarea *ngrxLet="styles$" [(ngModel)]="value" (ngModelChange)="onChange($event)" [placeholder]="styles.placeholder" [disabled]="isTemplate" [ngStyle]="{
 'width' : styles.width + 'px',
 'height' : styles.height + 'px',
 'padding' : styles.paddingTop + 'px ' + styles.paddingTop + 'px',

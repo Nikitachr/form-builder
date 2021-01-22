@@ -1,23 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import { AppState } from 'src/app/store/reducers';
-import { ComponentService } from 'src/app/shared/services/component.service';
-import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
-import { EAlignType } from 'src/app/shared/enums/align.enum';
-
+import {AppState} from 'src/app/store/reducers';
+import {ComponentService} from 'src/app/shared/services/component.service';
+import {EComponentType} from 'src/app/shared/enums/componentType.enum';
+import {ValidatorService} from 'src/app/shared/services/validator.service';
+import {BaseUiComponent} from 'src/app/building-blocks/base-ui/base-ui.component';
+import {EAlignType} from 'src/app/shared/enums/align.enum';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestroy {
 
-  styles = {
+  public styles = {
     placeholder: 'Button',
     width: 70,
     height: 36,
@@ -53,8 +53,8 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
-    super(idService, store, validatorService);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
+    super(idService, store, validatorService, cd);
   }
 
   ngOnInit(): void {
@@ -64,6 +64,5 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
   ngOnDestroy(): void {
     super.ngOnDestroy();
   }
-
 
 }

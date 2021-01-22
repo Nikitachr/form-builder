@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +12,8 @@ import { EAlignType } from 'src/app/shared/enums/align.enum';
 @Component({
   selector: 'app-label',
   templateUrl: './label.component.html',
-  styleUrls: ['./label.component.scss']
+  styleUrls: ['./label.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LabelComponent extends BaseUiComponent implements OnInit, OnDestroy {
 
@@ -38,8 +39,8 @@ export class LabelComponent extends BaseUiComponent implements OnInit, OnDestroy
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
-    super(idService, store, validatorService);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
+    super(idService, store, validatorService, cd);
   }
 
   ngOnInit(): void {

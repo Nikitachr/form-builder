@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 
@@ -17,7 +17,8 @@ import { EAlignType } from 'src/app/shared/enums/align.enum';
     provide: NG_VALUE_ACCESSOR,
     useExisting: SelectComponent,
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
@@ -58,8 +59,8 @@ export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestr
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
-    super(idService, store, validatorService);
+  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService, public cd: ChangeDetectorRef) {
+    super(idService, store, validatorService, cd);
   }
 
   ngOnInit(): void {
