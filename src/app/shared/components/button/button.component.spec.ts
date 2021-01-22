@@ -13,7 +13,6 @@ describe('Test Button Component', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
   let componentService: ComponentService;
-  let spyGetId: Spy;
   let spyGetName: Spy;
 
   const testStore = {
@@ -48,7 +47,6 @@ describe('Test Button Component', () => {
     fixture = TestBed.createComponent(ButtonComponent);
     componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetId = spyOn(componentService, 'getId').and.returnValue(1);
     spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Button'));
   });
 
@@ -60,7 +58,7 @@ describe('Test Button Component', () => {
     component.isTemplate = true;
     fixture.detectChanges();
     component.componentInit();
-    expect(component.id).toBeUndefined();
+    expect(component.index).toBeUndefined();
     expect(component.name).toBeUndefined();
   });
 
@@ -68,7 +66,7 @@ describe('Test Button Component', () => {
     component.isTemplate = false;
     fixture.detectChanges();
     component.componentInit();
-    expect(component.id).toBeTruthy();
+    expect(component.index).toBeTruthy();
     expect(component.name).toBeTruthy();
   });
 
@@ -78,8 +76,7 @@ describe('Test Button Component', () => {
 
   it('should call componentService', () => {
     component.componentInit();
-    expect(spyGetId.calls.any()).toBeTruthy();
-    expect(spyGetId.calls.any()).toBeTruthy();
+    expect(spyGetName().calls.any()).toBeTruthy();
   });
 
   it('component type should be a button', () => {

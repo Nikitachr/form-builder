@@ -24,8 +24,8 @@ import { ViewportSectionComponent } from 'src/app/viewport-section/viewport-sect
 import { TemplatesSectionComponent } from 'src/app/templates-section/templates-section.component';
 import { environment } from 'src/environments/environment';
 import { metaReducers, reducers } from 'src/app/store/reducers';
-import { GeneralStylesComponent } from 'src/app/shared/components/general-styles/general-styles.component';
-import { ComponentStylesComponent } from 'src/app/shared/components/component-styles/component-styles.component';
+import { GeneralStylesComponent } from 'src/app/core/components/general-styles/general-styles.component';
+import { ComponentStylesComponent } from 'src/app/core/components/component-styles/component-styles.component';
 import { LabelComponent } from 'src/app/shared/components/label/label.component';
 import { RequestInterceptor } from 'src/app/shared/interceptors/http.inteceptor';
 import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';

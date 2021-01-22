@@ -10,7 +10,7 @@ import { SelectComponent } from 'src/app/shared/components/select/select.compone
 import { TextareaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { LabelComponent } from 'src/app/shared/components/label/label.component';
 import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
-import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
+import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-templates-section',
