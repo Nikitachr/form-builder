@@ -5,7 +5,6 @@ import { Actions, ActionTypes } from 'src/app/store/actions/actions';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
-import { ESection } from 'src/app/shared/enums/section.enum';
 
 export interface ComponentState {
   components: UIComponent[];

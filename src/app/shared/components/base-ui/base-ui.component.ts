@@ -1,5 +1,5 @@
-import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Component, HostListener, Input,  OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { first, map, takeUntil } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,7 @@ import { UIComponent } from 'src/app/shared/models/component.model';
 
 export abstract class BaseUiComponent implements OnInit, OnDestroy {
 
-  public destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  public destroyed$: Subject<void> = new Subject();
 
   public styles$: Observable<ComponentStyles>;
   public styles: ComponentStyles;
@@ -64,7 +64,7 @@ export abstract class BaseUiComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next(true);
+    this.destroyed$.next();
     this.destroyed$.complete();
     if (!this.isTemplate) {
       this.store.dispatch(new DeleteComponent(this.index));

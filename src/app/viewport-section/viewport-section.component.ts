@@ -1,12 +1,11 @@
 import { Component, ComponentRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {CdkPortalOutletAttachedRef, ComponentPortal} from '@angular/cdk/portal';
+import { CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { AppState, getGeneralStyles, getSection } from 'src/app/store/reducers';
+import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
-import { ESection } from 'src/app/shared/enums/section.enum';
 import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
 import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
 
