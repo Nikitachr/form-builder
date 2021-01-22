@@ -50,6 +50,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   imports: [
     BrowserModule,
     ReactiveComponentModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     DragDropModule,
@@ -62,9 +63,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     HttpClientModule,
     ColorPickerModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    FormsModule,
-    ReactiveFormsModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

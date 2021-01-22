@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import {FormControl, FormGroup} from '@angular/forms';
 
 import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
@@ -33,7 +34,6 @@ export class ViewportSectionComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<ViewComponent[]>): void {
-    console.log(event);
     if (event.container.id === event.previousContainer.id) {
       if (!event.isPointerOverContainer) {
         this.components.splice(event.previousIndex, 1);

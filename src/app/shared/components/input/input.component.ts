@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
-import { ComponentStyles } from 'src/app/shared/models/component-styles';
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
@@ -12,9 +11,16 @@ import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.compone
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: InputComponent,
+    multi: true
+  }]
 })
-export class InputComponent extends BaseUiComponent{
+export class InputComponent extends BaseUiComponent implements ControlValueAccessor, OnInit, OnDestroy {
+
+  value: string;
 
   styles = {
     width: 300,
@@ -64,6 +70,19 @@ export class InputComponent extends BaseUiComponent{
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
+  }
+
+  onChange(_: any): void {}
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(): void {
   }
 
 }

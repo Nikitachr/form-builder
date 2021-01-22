@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
@@ -12,9 +12,16 @@ import { EAlignType } from 'src/app/shared/enums/align.enum';
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+  styleUrls: ['./checkbox.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: CheckboxComponent,
+    multi: true
+  }]
 })
-export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDestroy {
+export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
+
+  value: boolean;
 
   styles = {
     placeholder: 'Checkbox',
@@ -62,6 +69,19 @@ export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDest
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
+  }
+
+  onChange(_: any): void {}
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(): void {
   }
 
 }

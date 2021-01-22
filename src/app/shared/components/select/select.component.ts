@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
@@ -12,9 +12,14 @@ import { EAlignType } from 'src/app/shared/enums/align.enum';
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+  styleUrls: ['./select.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: SelectComponent,
+    multi: true
+  }]
 })
-export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestroy {
+export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   styles = {
     placeholder: 'Select',
@@ -32,6 +37,7 @@ export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestr
     align: EAlignType.Center
   };
 
+  value = 'first';
   ComponentType = EComponentType.Select;
 
   initForm(): void {
@@ -62,6 +68,19 @@ export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestr
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
+  }
+
+  onChange(_: any): void {}
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(): void {
   }
 
 }

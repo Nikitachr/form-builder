@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
@@ -11,9 +11,16 @@ import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.compone
 @Component({
   selector: 'app-textarea',
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss']
+  styleUrls: ['./textarea.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: TextareaComponent,
+    multi: true
+  }]
 })
-export class TextareaComponent extends BaseUiComponent implements OnInit, OnDestroy {
+export class TextareaComponent extends BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
+
+  value: string;
 
   styles = {
     placeholder: 'Text area',
@@ -63,6 +70,19 @@ export class TextareaComponent extends BaseUiComponent implements OnInit, OnDest
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
+  }
+
+  onChange(_: any): void {}
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(): void {
   }
 
 }
