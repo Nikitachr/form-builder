@@ -1,4 +1,4 @@
-<select [(ngModel)]="value" [disabled]="isTemplate" [ngClass]="styles?.align" [ngStyle]="{
+<select [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [ngClass]="styles?.align" [ngStyle]="{
  'width' : styles.width + 'px',
  'height' : styles.height + 'px',
  'marginTop' : styles.marginTop + 'px',
