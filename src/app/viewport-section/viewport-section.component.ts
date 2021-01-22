@@ -4,9 +4,8 @@ import { Observable } from 'rxjs';
 import { CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { AppState, getGeneralStyles, getSection } from 'src/app/store/reducers';
+import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
-import { ESection } from 'src/app/shared/enums/section.enum';
 import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
 import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.component';
 
@@ -17,8 +16,6 @@ import { BaseUiComponent } from 'src/app/shared/components/base-ui/base-ui.compo
 })
 export class ViewportSectionComponent implements OnInit {
 
-  section: ESection;
-  section$: Observable<ESection>;
   components: ViewComponent[] = [];
   id = 0;
   generalStyles$: Observable<GeneralStyles>;
@@ -26,17 +23,17 @@ export class ViewportSectionComponent implements OnInit {
   foo(ref: CdkPortalOutletAttachedRef): void {
     ref = ref as ComponentRef<BaseUiComponent>;
     ref.instance.isTemplate = false;
+    ref.instance.index = this.id;
   }
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.generalStyles$ = this.store.select(getGeneralStyles);
-    this.section$ = this.store.select(getSection) as Observable<ESection>;
-    this.section$.subscribe(res => this.section = res);
   }
 
   drop(event: CdkDragDrop<ViewComponent[]>): void {
+    console.log(event);
     if (event.container.id === event.previousContainer.id) {
       if (!event.isPointerOverContainer) {
         this.components.splice(event.previousIndex, 1);

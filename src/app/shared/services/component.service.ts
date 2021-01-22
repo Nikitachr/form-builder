@@ -12,13 +12,13 @@ import { UIComponent } from 'src/app/shared/models/component.model';
 })
 export class ComponentService {
 
-  id = 0;
+  //id = 0;
 
 constructor(private store: Store<AppState>) { }
 
-  getId(): number {
-    return this.id++;
-  }
+  //getId(): number {
+  //  return this.id++;
+  //}
 
   getName(type: EComponentType): Observable<string> {
     return this.store.select(getComponentByType(type)).pipe(

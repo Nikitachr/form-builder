@@ -12,7 +12,6 @@ export enum ActionTypes {
   DeleteComponent = '[Components] Delete component',
   SelectComponent = '[Components] Select component',
   UpdateGeneralStyles = '[Component] Update general styles',
-  ChangeSection = '[Component] Change section'
 }
 
 export class LoadComponents implements Action {
@@ -24,12 +23,6 @@ export class LoadComponents implements Action {
 export class UpdateComponent implements Action {
   readonly type = ActionTypes.UpdateComponent;
   constructor(public payload: UIComponent) {
-  }
-}
-
-export  class ChangeSection implements Action {
-  readonly type = ActionTypes.ChangeSection;
-  constructor(public payload: ESection) {
   }
 }
 
@@ -60,7 +53,6 @@ export class UpdateGeneralStyles implements Action {
 export type Actions =
   | LoadComponents
   | UpdateComponent
-  | ChangeSection
   | DeleteComponent
   | SelectComponentAction
   | UpdateGeneralStyles
