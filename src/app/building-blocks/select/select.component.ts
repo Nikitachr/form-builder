@@ -1,32 +1,30 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.component';
+import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
 import { EAlignType } from 'src/app/shared/enums/align.enum';
 
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: CheckboxComponent,
+    useExisting: SelectComponent,
     multi: true
   }]
 })
-export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
-
-  value: boolean;
+export class SelectComponent extends  BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   styles = {
-    placeholder: 'Checkbox',
-    width: 15,
-    height: 15,
+    placeholder: 'Select',
+    width: 100,
+    height: 36,
     marginTop: 5,
     required: true,
     fontSize: 18,
@@ -36,10 +34,11 @@ export class CheckboxComponent extends BaseUiComponent implements OnInit, OnDest
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#000',
-    align: EAlignType.Left
+    align: EAlignType.Center
   };
 
-  ComponentType = EComponentType.Checkbox;
+  value = 'first';
+  ComponentType = EComponentType.Select;
 
   initForm(): void {
     this.editForm = new FormGroup({

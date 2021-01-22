@@ -6,37 +6,30 @@ import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
-import { TextareaComponent } from 'src/app/shared/components/textarea/textarea.component';
+import { EAlignType } from 'src/app/shared/enums/align.enum';
+import { LabelComponent } from 'src/app/building-blocks/label/label.component';
 
-describe('Test Textarea Component', () => {
-  let component: TextareaComponent;
-  let fixture: ComponentFixture<TextareaComponent>;
+describe('Test Label Component', () => {
+  let component: LabelComponent;
+  let fixture: ComponentFixture<LabelComponent>;
   let componentService: ComponentService;
   let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
-    select: jasmine.createSpy('select').and.returnValue(of({ styles: {
-        placeholder: 'Text area',
-        width: 300,
-        height: 100,
-        paddingTop: 10,
-        paddingLeft: 10,
+    select: jasmine.createSpy('select').and.returnValue(of({styles: {
+        placeholder: 'Label',
         marginTop: 5,
-        required: true,
         fontSize: 18,
         fontWeight: 400,
         color: '#000',
-        bgColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#000'
+        align: EAlignType.Left
       }}))
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextareaComponent ],
+      declarations: [ LabelComponent ],
       providers: [
         { provide: Store, useValue: testStore },
         ComponentService,
@@ -44,10 +37,10 @@ describe('Test Textarea Component', () => {
       ]
     })
       .compileComponents();
-    fixture = TestBed.createComponent(TextareaComponent);
+    fixture = TestBed.createComponent(LabelComponent);
     componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Textarea'));
+    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Label'));
   });
 
   it('should create the component', () => {
@@ -77,14 +70,14 @@ describe('Test Textarea Component', () => {
     expect(spyGetName.calls.any()).toBeTruthy();
   });
 
-  it('component type should be a textarea', () => {
-    expect(component.ComponentType).toEqual(EComponentType.Textarea);
+  it('component type should be a label', () => {
+    expect(component.ComponentType).toEqual(EComponentType.Label);
   });
 
   it('should render placeholder', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('textarea').placeholder)
+    expect(compiled.querySelector('span').textContent)
       .toContain(component.styles.placeholder);
   });
 });

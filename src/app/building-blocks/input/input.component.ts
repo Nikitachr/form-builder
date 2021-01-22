@@ -6,7 +6,7 @@ import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.component';
+import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-input',

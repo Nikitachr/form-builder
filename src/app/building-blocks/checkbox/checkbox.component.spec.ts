@@ -7,29 +7,36 @@ import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { EAlignType } from 'src/app/shared/enums/align.enum';
-import { LabelComponent } from 'src/app/shared/components/label/label.component';
+import { CheckboxComponent } from 'src/app/building-blocks/checkbox/checkbox.component';
 
-describe('Test Label Component', () => {
-  let component: LabelComponent;
-  let fixture: ComponentFixture<LabelComponent>;
+describe('Test Checkbox Component', () => {
+  let component: CheckboxComponent;
+  let fixture: ComponentFixture<CheckboxComponent>;
   let componentService: ComponentService;
   let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
-    select: jasmine.createSpy('select').and.returnValue(of({styles: {
-        placeholder: 'Label',
+    select: jasmine.createSpy('select').and.returnValue(of({ styles: {
+        placeholder: 'Checkbox',
+        width: 15,
+        height: 15,
         marginTop: 5,
+        required: true,
         fontSize: 18,
         fontWeight: 400,
         color: '#000',
+        bgColor: '#fff',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#000',
         align: EAlignType.Left
       }}))
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LabelComponent ],
+      declarations: [ CheckboxComponent ],
       providers: [
         { provide: Store, useValue: testStore },
         ComponentService,
@@ -37,10 +44,10 @@ describe('Test Label Component', () => {
       ]
     })
       .compileComponents();
-    fixture = TestBed.createComponent(LabelComponent);
+    fixture = TestBed.createComponent(CheckboxComponent);
     componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Label'));
+    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Checkbox'));
   });
 
   it('should create the component', () => {
@@ -70,14 +77,14 @@ describe('Test Label Component', () => {
     expect(spyGetName.calls.any()).toBeTruthy();
   });
 
-  it('component type should be a label', () => {
-    expect(component.ComponentType).toEqual(EComponentType.Label);
+  it('component type should be a checkbox', () => {
+    expect(component.ComponentType).toEqual(EComponentType.Checkbox);
   });
 
   it('should render placeholder', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('span').textContent)
+    expect(compiled.querySelector('label').textContent)
       .toContain(component.styles.placeholder);
   });
 });

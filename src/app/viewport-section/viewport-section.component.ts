@@ -8,7 +8,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
-import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.component';
+import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
 
 @Component({
   selector: 'app-viewport-section',

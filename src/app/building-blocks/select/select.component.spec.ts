@@ -6,24 +6,24 @@ import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { EAlignType } from 'src/app/shared/enums/align.enum';
+import { SelectComponent } from 'src/app/building-blocks/select/select.component';
 
-describe('Test Button Component', () => {
-  let component: ButtonComponent;
-  let fixture: ComponentFixture<ButtonComponent>;
+describe('Test Select Component', () => {
+  let component: SelectComponent;
+  let fixture: ComponentFixture<SelectComponent>;
   let componentService: ComponentService;
   let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
-    select: jasmine.createSpy('select').and.returnValue(of({styles: {
-        placeholder: 'Button',
-        width: 70,
+    select: jasmine.createSpy('select').and.returnValue(of({ styles: {
+        placeholder: 'Select',
+        width: 100,
         height: 36,
         marginTop: 5,
         required: true,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 400,
         color: '#000',
         bgColor: '#fff',
@@ -36,7 +36,7 @@ describe('Test Button Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ],
+      declarations: [ SelectComponent ],
       providers: [
         { provide: Store, useValue: testStore },
         ComponentService,
@@ -44,10 +44,10 @@ describe('Test Button Component', () => {
       ]
     })
       .compileComponents();
-    fixture = TestBed.createComponent(ButtonComponent);
+    fixture = TestBed.createComponent(SelectComponent);
     componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Button'));
+    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Select'));
   });
 
   it('should create the component', () => {
@@ -58,7 +58,6 @@ describe('Test Button Component', () => {
     component.isTemplate = true;
     fixture.detectChanges();
     component.componentInit();
-    expect(component.index).toBeUndefined();
     expect(component.name).toBeUndefined();
   });
 
@@ -66,7 +65,6 @@ describe('Test Button Component', () => {
     component.isTemplate = false;
     fixture.detectChanges();
     component.componentInit();
-    expect(component.index).toBeTruthy();
     expect(component.name).toBeTruthy();
   });
 
@@ -76,17 +74,17 @@ describe('Test Button Component', () => {
 
   it('should call componentService', () => {
     component.componentInit();
-    expect(spyGetName().calls.any()).toBeTruthy();
+    expect(spyGetName.calls.any()).toBeTruthy();
   });
 
-  it('component type should be a button', () => {
-    expect(component.ComponentType).toEqual(EComponentType.Button);
+  it('component type should be a Select', () => {
+    expect(component.ComponentType).toEqual(EComponentType.Select);
   });
 
   it('should render placeholder', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('button').textContent)
+    expect(compiled.querySelector('option').textContent)
       .toContain(component.styles.placeholder);
   });
 });

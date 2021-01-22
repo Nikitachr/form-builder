@@ -6,21 +6,22 @@ import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
-import { EAlignType } from 'src/app/shared/enums/align.enum';
-import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { InputComponent } from 'src/app/building-blocks/input/input.component';
 
-describe('Test Checkbox Component', () => {
-  let component: CheckboxComponent;
-  let fixture: ComponentFixture<CheckboxComponent>;
+describe('Test Input Component', () => {
+  let component: InputComponent;
+  let fixture: ComponentFixture<InputComponent>;
   let componentService: ComponentService;
   let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
-    select: jasmine.createSpy('select').and.returnValue(of({ styles: {
-        placeholder: 'Checkbox',
-        width: 15,
-        height: 15,
+    select: jasmine.createSpy('select').and.returnValue(of({styles: {
+        width: 300,
+        placeholder: 'Input',
+        height: 36,
+        paddingTop: 10,
+        paddingLeft: 10,
         marginTop: 5,
         required: true,
         fontSize: 18,
@@ -29,14 +30,13 @@ describe('Test Checkbox Component', () => {
         bgColor: '#fff',
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#000',
-        align: EAlignType.Left
+        borderColor: '#000'
       }}))
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckboxComponent ],
+      declarations: [ InputComponent ],
       providers: [
         { provide: Store, useValue: testStore },
         ComponentService,
@@ -44,10 +44,10 @@ describe('Test Checkbox Component', () => {
       ]
     })
       .compileComponents();
-    fixture = TestBed.createComponent(CheckboxComponent);
+    fixture = TestBed.createComponent(InputComponent);
     componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Checkbox'));
+    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Button'));
   });
 
   it('should create the component', () => {
@@ -78,13 +78,13 @@ describe('Test Checkbox Component', () => {
   });
 
   it('component type should be a checkbox', () => {
-    expect(component.ComponentType).toEqual(EComponentType.Checkbox);
+    expect(component.ComponentType).toEqual(EComponentType.Input);
   });
 
   it('should render placeholder', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('label').textContent)
+    expect(compiled.querySelector('input').placeholder)
       .toContain(component.styles.placeholder);
   });
 });

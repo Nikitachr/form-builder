@@ -1,26 +1,33 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
 import { ComponentService } from 'src/app/shared/services/component.service';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { BaseUiComponent } from 'src/app/core/components/base-ui/base-ui.component';
-import { EAlignType } from 'src/app/shared/enums/align.enum';
-
+import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: TextareaComponent,
+    multi: true
+  }]
 })
-export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestroy {
+export class TextareaComponent extends BaseUiComponent implements OnInit, OnDestroy, ControlValueAccessor {
+
+  value: string;
 
   styles = {
-    placeholder: 'Button',
-    width: 70,
-    height: 36,
+    placeholder: 'Text area',
+    width: 300,
+    height: 100,
+    paddingTop: 10,
+    paddingLeft: 10,
     marginTop: 5,
     required: true,
     fontSize: 18,
@@ -29,17 +36,18 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
     bgColor: '#fff',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#000',
-    align: EAlignType.Center
+    borderColor: '#000'
   };
 
-  ComponentType = EComponentType.Button;
+  ComponentType = EComponentType.Textarea;
 
   initForm(): void {
     this.editForm = new FormGroup({
       placeholder: new FormControl('', [Validators.required]),
       width: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       height: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      paddingTop: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
+      paddingLeft: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       marginTop: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       required: new FormControl('', [Validators.required]),
       fontSize: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
@@ -49,7 +57,6 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
       borderRadius: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       borderWidth: new FormControl('', [Validators.required, this.validatorService.numberValidator()]),
       borderColor: new FormControl('', [Validators.required, this.validatorService.colorValidator()]),
-      align: new FormControl('', [Validators.required])
     });
   }
 
@@ -65,5 +72,17 @@ export class ButtonComponent extends BaseUiComponent implements OnInit, OnDestro
     super.ngOnDestroy();
   }
 
+  onChange(_: any): void {}
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(): void {
+  }
 
 }
