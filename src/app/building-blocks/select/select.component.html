@@ -1,4 +1,4 @@
-<select *ngrxLet="styles$" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [ngClass]="styles?.align" [ngStyle]="{
+<select *ngIf="styles$ | ngrxPush as styles" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [ngClass]="styles?.align" [ngStyle]="{
  'width' : styles.width + 'px',
  'height' : styles.height + 'px',
  'marginTop' : styles.marginTop + 'px',

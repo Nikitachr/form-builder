@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { EAlignType } from 'src/app/shared/enums/align.enum';
@@ -12,8 +11,6 @@ import { LabelComponent } from 'src/app/building-blocks/label/label.component';
 describe('Test Label Component', () => {
   let component: LabelComponent;
   let fixture: ComponentFixture<LabelComponent>;
-  let componentService: ComponentService;
-  let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
@@ -32,15 +29,12 @@ describe('Test Label Component', () => {
       declarations: [ LabelComponent ],
       providers: [
         { provide: Store, useValue: testStore },
-        ComponentService,
         ValidatorService
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(LabelComponent);
-    componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Label'));
   });
 
   it('should create the component', () => {
@@ -63,11 +57,6 @@ describe('Test Label Component', () => {
 
   it('should have default styles', () => {
     expect(component.styles).toBeTruthy();
-  });
-
-  it('should call componentService', () => {
-    component.componentInit();
-    expect(spyGetName.calls.any()).toBeTruthy();
   });
 
   it('component type should be a label', () => {

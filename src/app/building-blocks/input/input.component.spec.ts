@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { InputComponent } from 'src/app/building-blocks/input/input.component';
@@ -11,8 +10,6 @@ import { InputComponent } from 'src/app/building-blocks/input/input.component';
 describe('Test Input Component', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
-  let componentService: ComponentService;
-  let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
@@ -39,15 +36,12 @@ describe('Test Input Component', () => {
       declarations: [ InputComponent ],
       providers: [
         { provide: Store, useValue: testStore },
-        ComponentService,
         ValidatorService
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(InputComponent);
-    componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Button'));
   });
 
   it('should create the component', () => {
@@ -70,11 +64,6 @@ describe('Test Input Component', () => {
 
   it('should have default styles', () => {
     expect(component.styles).toBeTruthy();
-  });
-
-  it('should call componentService', () => {
-    component.componentInit();
-    expect(spyGetName.calls.any()).toBeTruthy();
   });
 
   it('component type should be a checkbox', () => {

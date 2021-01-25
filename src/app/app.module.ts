@@ -12,6 +12,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 
 import { ButtonComponent } from 'src/app/building-blocks/button/button.component';
 import { InputComponent } from 'src/app/building-blocks/input/input.component';
@@ -30,6 +31,7 @@ import { LabelComponent } from 'src/app/building-blocks/label/label.component';
 import { RequestInterceptor } from 'src/app/shared/interceptors/http.inteceptor';
 import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { Effects } from 'src/app/store/effects/effect';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     BrowserAnimationsModule,
     PortalModule,
     StoreModule.forRoot(reducers, {metaReducers}),
+    EffectsModule.forRoot([Effects]),
     MatButtonModule,
     MatExpansionModule,
     MatTreeModule,

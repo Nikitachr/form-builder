@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { ButtonComponent } from 'src/app/building-blocks/button/button.component';
@@ -12,8 +11,6 @@ import { EAlignType } from 'src/app/shared/enums/align.enum';
 describe('Test Button Component', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
-  let componentService: ComponentService;
-  let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
@@ -39,15 +36,12 @@ describe('Test Button Component', () => {
       declarations: [ ButtonComponent ],
       providers: [
         { provide: Store, useValue: testStore },
-        ComponentService,
         ValidatorService
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(ButtonComponent);
-    componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Button'));
   });
 
   it('should create the component', () => {
@@ -72,11 +66,6 @@ describe('Test Button Component', () => {
 
   it('should have default styles', () => {
     expect(component.styles).toBeTruthy();
-  });
-
-  it('should call componentService', () => {
-    component.componentInit();
-    expect(spyGetName().calls.any()).toBeTruthy();
   });
 
   it('component type should be a button', () => {

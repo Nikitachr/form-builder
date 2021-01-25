@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { EAlignType } from 'src/app/shared/enums/align.enum';
@@ -12,8 +11,6 @@ import { SelectComponent } from 'src/app/building-blocks/select/select.component
 describe('Test Select Component', () => {
   let component: SelectComponent;
   let fixture: ComponentFixture<SelectComponent>;
-  let componentService: ComponentService;
-  let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
@@ -39,15 +36,12 @@ describe('Test Select Component', () => {
       declarations: [ SelectComponent ],
       providers: [
         { provide: Store, useValue: testStore },
-        ComponentService,
         ValidatorService
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(SelectComponent);
-    componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Select'));
   });
 
   it('should create the component', () => {
@@ -74,7 +68,6 @@ describe('Test Select Component', () => {
 
   it('should call componentService', () => {
     component.componentInit();
-    expect(spyGetName.calls.any()).toBeTruthy();
   });
 
   it('component type should be a Select', () => {

@@ -1,4 +1,4 @@
-<span *ngrxLet="styles$" [ngClass]="styles?.align" [ngStyle]="{
+<span *ngIf="styles$ | ngrxPush as styles" [ngClass]="styles?.align" [ngStyle]="{
   'marginTop': styles.marginTop + 'px',
   'fontSize' : styles.fontSize + 'px',
   'fontWeight' : styles.fontWeight,

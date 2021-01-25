@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { TextareaComponent } from 'src/app/building-blocks/textarea/textarea.component';
@@ -11,8 +10,6 @@ import { TextareaComponent } from 'src/app/building-blocks/textarea/textarea.com
 describe('Test Textarea Component', () => {
   let component: TextareaComponent;
   let fixture: ComponentFixture<TextareaComponent>;
-  let componentService: ComponentService;
-  let spyGetName: Spy;
 
   const testStore = {
     dispatch: jasmine.createSpy('dispatch'),
@@ -39,15 +36,12 @@ describe('Test Textarea Component', () => {
       declarations: [ TextareaComponent ],
       providers: [
         { provide: Store, useValue: testStore },
-        ComponentService,
         ValidatorService
       ]
     })
       .compileComponents();
     fixture = TestBed.createComponent(TextareaComponent);
-    componentService = fixture.debugElement.injector.get(ComponentService);
     component = fixture.componentInstance;
-    spyGetName = spyOn(componentService, 'getName').and.returnValue(of('Textarea'));
   });
 
   it('should create the component', () => {
@@ -70,11 +64,6 @@ describe('Test Textarea Component', () => {
 
   it('should have default styles', () => {
     expect(component.styles).toBeTruthy();
-  });
-
-  it('should call componentService', () => {
-    component.componentInit();
-    expect(spyGetName.calls.any()).toBeTruthy();
   });
 
   it('component type should be a textarea', () => {

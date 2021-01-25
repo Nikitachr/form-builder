@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 import { AppState } from 'src/app/store/reducers';
-import { ComponentService } from 'src/app/shared/services/component.service';
 import { EComponentType } from 'src/app/shared/enums/componentType.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
@@ -61,8 +60,8 @@ export class TextareaComponent extends BaseUiComponent implements OnInit, OnDest
     });
   }
 
-  constructor(public idService: ComponentService, public store: Store<AppState>, public validatorService: ValidatorService) {
-    super(idService, store, validatorService);
+  constructor(public store: Store<AppState>, public validatorService: ValidatorService) {
+    super(store, validatorService);
   }
 
   ngOnInit(): void {

@@ -3,9 +3,13 @@ import { Action } from '@ngrx/store';
 import { ComponentStyles } from 'src/app/shared/models/component-styles';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
-import { ESection } from 'src/app/shared/enums/section.enum';
+import { User } from 'src/app/shared/models/user.model';
 
 export enum ActionTypes {
+  Login = '[Components] Login',
+  LoginSuccess = '[Components] Login success',
+  Registration = '[Components] Registration ',
+  RegistrationSuccess = '[Components] Registration success',
   LoadComponents = '[Components] Load components',
   UpdateComponent = '[Components] Update component',
   AddComponent = '[Components] Add component',
@@ -44,6 +48,30 @@ export class SelectComponentAction implements Action {
   }
 }
 
+export class LoginAction implements Action {
+  readonly type = ActionTypes.Login;
+  constructor(public payload: User) {
+  }
+}
+
+export class LoginSuccessAction implements Action {
+  readonly type = ActionTypes.LoginSuccess;
+  constructor(public payload: string) {
+  }
+}
+
+export class RegistrationAction implements Action {
+  readonly type = ActionTypes.Registration;
+  constructor(public payload: User) {
+  }
+}
+
+export class RegistrationSuccessAction implements Action {
+  readonly type = ActionTypes.RegistrationSuccess;
+  constructor(public payload: string) {
+  }
+}
+
 export class UpdateGeneralStyles implements Action {
   readonly type = ActionTypes.UpdateGeneralStyles;
   constructor(public payload: GeneralStyles) {
@@ -51,6 +79,10 @@ export class UpdateGeneralStyles implements Action {
 }
 
 export type Actions =
+  | LoginAction
+  | LoginSuccessAction
+  | RegistrationAction
+  | RegistrationSuccessAction
   | LoadComponents
   | UpdateComponent
   | DeleteComponent

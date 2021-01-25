@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AppState } from 'src/app/store/reducers';
+import { Store } from '@ngrx/store';
+import { LoginAction } from 'src/app/store/actions/actions';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +11,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class AppComponent implements OnInit {
   title = 'form-builder';
 
-  constructor(private authService: AuthService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
-    //this.auth();
-  }
-
-  auth(): void {
-    if (!localStorage.getItem('token')) {
-      this.authService.login({ email: 'test@gmail.com', password: 'test' })
-        .subscribe(
-          ({ accessToken }) => localStorage.setItem('token', accessToken),
-          // tslint:disable-next-line:max-line-length
-          error =>  this.authService.register({ email: 'test@gmail.com', password: 'test' }).subscribe((res) => localStorage.setItem('token', res.accessToken))
-        );
-    }
+    this.store.dispatch(new LoginAction({ email: 'test@gmail.com', password: 'test' }));
   }
 }
 
