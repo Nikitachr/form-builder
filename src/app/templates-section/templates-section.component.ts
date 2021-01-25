@@ -49,7 +49,7 @@ export class TemplatesSectionComponent {
     },
   ];
 
-  foo(ref: CdkPortalOutletAttachedRef): void {
+  input(ref: CdkPortalOutletAttachedRef): void {
     ref = ref as ComponentRef<BaseUiComponent>;
     ref.instance.isTemplate = true;
   }

@@ -21,7 +21,7 @@ export class ViewportSectionComponent implements OnInit {
   id = 0;
   generalStyles$: Observable<GeneralStyles>;
 
-  foo(ref: CdkPortalOutletAttachedRef): void {
+  input(ref: CdkPortalOutletAttachedRef): void {
     ref = ref as ComponentRef<BaseUiComponent>;
     ref.instance.isTemplate = false;
     ref.instance.index = this.id;
