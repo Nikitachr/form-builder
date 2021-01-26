@@ -1,4 +1,5 @@
 <div
+    *ngrxLet="templateComponents$ as templateComponents"
     cdkDropList
     id="list-1"
     [cdkDropListData]="templateComponents"
@@ -9,6 +10,6 @@
     (cdkDropListDropped)="drop($event)"
     >
     <div class="example-box w__100per d__flex d__flex--direction-column d__flex--items-center" *ngFor="let component of templateComponents" cdkDrag>
-      <ng-template [cdkPortalOutlet]="component.component" (attached)="input($event)"></ng-template>
+      <ng-template *ngComponentOutlet="component.component; injector: (getInjectorById(component.id) | ngrxPush).injector"></ng-template>
     </div>
 </div>

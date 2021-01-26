@@ -1,4 +1,4 @@
-<textarea *ngIf="styles$ | ngrxPush as styles" [(ngModel)]="value" (ngModelChange)="onChange($event)" [placeholder]="styles.placeholder" [disabled]="isTemplate" [ngStyle]="{
+<textarea [(ngModel)]="value" (ngModelChange)="onChange($event)" [placeholder]="styles.placeholder" [ngStyle]="{
 'width' : styles.width + 'px',
 'height' : styles.height + 'px',
 'padding' : styles.paddingTop + 'px ' + styles.paddingTop + 'px',

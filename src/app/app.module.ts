@@ -20,9 +20,9 @@ import { CheckboxComponent } from 'src/app/building-blocks/checkbox/checkbox.com
 import { TextareaComponent} from 'src/app/building-blocks/textarea/textarea.component';
 import { SelectComponent} from 'src/app/building-blocks/select/select.component';
 import { AppComponent } from 'src/app/app.component';
-import { StylesSectionComponent } from 'src/app/styles-section/styles-section.component';
-import { ViewportSectionComponent } from 'src/app/viewport-section/viewport-section.component';
-import { TemplatesSectionComponent } from 'src/app/templates-section/templates-section.component';
+import { StylesSectionComponent } from 'src/app/form-builder/styles-section/styles-section.component';
+import { ViewportSectionComponent } from 'src/app/form-builder/viewport-section/viewport-section.component';
+import { TemplatesSectionComponent } from 'src/app/form-builder/templates-section/templates-section.component';
 import { environment } from 'src/environments/environment';
 import { metaReducers, reducers } from 'src/app/store/reducers';
 import { GeneralStylesComponent } from 'src/app/core/components/general-styles/general-styles.component';
@@ -32,6 +32,10 @@ import { RequestInterceptor } from 'src/app/shared/interceptors/http.inteceptor'
 import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Effects } from 'src/app/store/effects/effect';
+import { STYLES } from 'src/app/shared/tokens/styles.token';
+import { StylesTokenService } from 'src/app/shared/services/styles-token.service';
+
+
 
 @NgModule({
   declarations: [
@@ -47,7 +51,7 @@ import { Effects } from 'src/app/store/effects/effect';
     SelectComponent,
     GeneralStylesComponent,
     LabelComponent,
-    FormBuilderComponent
+    FormBuilderComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,9 @@ import { Effects } from 'src/app/store/effects/effect';
     DragDropModule,
     BrowserAnimationsModule,
     PortalModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, {metaReducers, runtimeChecks: {
+        strictStateImmutability: false
+      }}),
     EffectsModule.forRoot([Effects]),
     MatButtonModule,
     MatExpansionModule,
@@ -68,11 +74,17 @@ import { Effects } from 'src/app/store/effects/effect';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+    {
+      provide: STYLES,
+      useValue: ''
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

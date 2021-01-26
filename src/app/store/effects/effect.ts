@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import * as clientActions from 'src/app/store/actions/actions';
 import { User } from 'src/app/shared/models/user.model';
-import { AuthResponse } from 'src/app/shared/models/authResponse.model';
+import { AuthResponseModel } from 'src/app/shared/models/auth-response.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class Effects {
     ofType(clientActions.ActionTypes.Login),
     map((action: any) => action.payload),
     switchMap((action: User) => this.authService.login(action).pipe(
-      map(((res: AuthResponse) => new clientActions.LoginSuccessAction(res.accessToken))),
+      map(((res: AuthResponseModel) => new clientActions.LoginSuccessAction(res.accessToken))),
       catchError(_ => of(new clientActions.RegistrationAction(action)))
     ))
   ));
@@ -30,7 +30,7 @@ export class Effects {
     ofType(clientActions.ActionTypes.Registration),
     map((action: any) => action.payload),
     switchMap((action: User) => this.authService.register(action).pipe(
-      map(((res: AuthResponse) => new clientActions.RegistrationSuccessAction(res.accessToken)))
+      map(((res: AuthResponseModel) => new clientActions.RegistrationSuccessAction(res.accessToken)))
     ))
   ));
 

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ComponentStyles } from 'src/app/shared/models/component-styles';
+import { ComponentStylesModel } from 'src/app/shared/models/component-styles.model';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
 import { User } from 'src/app/shared/models/user.model';
@@ -20,7 +20,7 @@ export enum ActionTypes {
 
 export class LoadComponents implements Action {
   readonly type = ActionTypes.LoadComponents;
-  constructor(public payload: ComponentStyles[]) {
+  constructor(public payload: UIComponent[]) {
   }
 }
 
@@ -29,6 +29,8 @@ export class UpdateComponent implements Action {
   constructor(public payload: UIComponent) {
   }
 }
+
+
 
 export class AddComponent implements Action {
   readonly type = ActionTypes.AddComponent;

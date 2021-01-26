@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { AppState, getComponents, getSelectedComponent } from 'src/app/store/reducers';
+import { AppState } from 'src/app/store/reducers';
 import { UIComponent } from 'src/app/shared/models/component.model';
 import { SelectComponentAction } from 'src/app/store/actions/actions';
 
@@ -19,10 +19,9 @@ export class StylesSectionComponent implements OnInit {
   components$: Observable<UIComponent[]>;
 
   constructor(private store: Store<AppState>) { }
-
   ngOnInit(): void {
-    this.components$ = this.store.select(getComponents).pipe(delay(0));
-    this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
+    //this.components$ = this.store.select(getComponents).pipe(delay(0));
+    //this.selectedComponent$ = this.store.select(getSelectedComponent).pipe(delay(0));
   }
 
   onExpand(id: number): void {

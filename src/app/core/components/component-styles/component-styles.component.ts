@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { UpdateComponent } from 'src/app/store/actions/actions';
 import { AppState } from 'src/app/store/reducers';
 import { UIComponent } from 'src/app/shared/models/component.model';
-import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { EComponentType } from 'src/app/shared/enums/component-type.enum';
 import { EAlignType } from 'src/app/shared/enums/align.enum';
 
 @Component({
@@ -32,14 +32,12 @@ export class ComponentStylesComponent implements OnInit {
   }
 
   initForm(): void {
-    this.form = _.cloneDeep(this.component?.editForm);
   }
 
   updateStyles(): void {
     if (this.form?.invalid) {
       return;
     }
-
     this.store.dispatch(new UpdateComponent({ ...this.component, styles: this.form?.value }));
   }
 

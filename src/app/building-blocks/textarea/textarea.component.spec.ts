@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
-import { EComponentType } from 'src/app/shared/enums/componentType.enum';
+import { EComponentType } from 'src/app/shared/enums/component-type.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import Spy = jasmine.Spy;
 import { TextareaComponent } from 'src/app/building-blocks/textarea/textarea.component';

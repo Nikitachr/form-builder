@@ -10,8 +10,8 @@
     'padding': styles?.paddingTop + 'px ' + styles?.paddingLeft + 'px',
     'backgroundColor': styles?.backgroundColor
   }">
-  <div class="example-box w__100per d__flex d__flex--direction-column d__flex--items-center" [ngStyle]="{ 'marginBottom': styles?.margins + 'px' }" *ngFor="let component of components; let i = index" cdkDrag>
-    <ng-template [cdkPortalOutlet]="component.component" (attached)="input($event)"></ng-template>
-  </div>
+    <div class="example-box w__100per d__flex d__flex--direction-column d__flex--items-center" [ngStyle]="{ 'marginBottom': styles?.margins + 'px' }" *ngFor="let component of components" cdkDrag>
+      <ng-template *ngComponentOutlet="component.component; injector: (getInjectorById(component.id) | ngrxPush).injector"></ng-template>
+    </div>
 </div>
 </ng-container>

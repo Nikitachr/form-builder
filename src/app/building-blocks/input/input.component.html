@@ -1,4 +1,4 @@
-<input *ngIf="styles$ | ngrxPush as styles" type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [placeholder]="styles.placeholder" [ngStyle]="{
+<input type="text" [(ngModel)]="value" (ngModelChange)="onChange($event)" [placeholder]="styles.placeholder" [ngStyle]="{
   'width' : styles.width + 'px',
   'height' : styles.height + 'px',
   'padding' : styles.paddingTop + 'px ' + styles.paddingLeft + 'px',

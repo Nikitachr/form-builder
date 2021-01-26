@@ -1,5 +1,5 @@
-<select *ngIf="styles$ | ngrxPush as styles" [(ngModel)]="value" (ngModelChange)="onChange($event)" [disabled]="isTemplate" [ngClass]="styles?.align" [ngStyle]="{
- 'width' : styles.width + 'px',
+<select [(ngModel)]="value" (ngModelChange)="onChange($event)" [ngClass]="styles?.align" [ngStyle]="{
+ 'width' : styles?.width + 'px',
  'height' : styles.height + 'px',
  'marginTop' : styles.marginTop + 'px',
  'fontSize' : styles.fontSize + 'px',

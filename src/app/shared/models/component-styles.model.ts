@@ -1,6 +1,6 @@
 import { EAlignType } from 'src/app/shared/enums/align.enum';
 
-export interface ComponentStyles {
+export interface ComponentStylesModel {
   placeholder?: string;
   width?: number;
   height?: number;

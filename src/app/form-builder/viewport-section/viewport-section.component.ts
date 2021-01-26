@@ -6,8 +6,12 @@ import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-d
 
 import { AppState, getGeneralStyles } from 'src/app/store/reducers';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
-import { ViewComponent } from 'src/app/shared/models/viewComponent.model';
+import { ViewComponent } from 'src/app/shared/models/view-component.model';
 import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.component';
+import { StylesTokenService } from 'src/app/shared/services/styles-token.service';
+import { StylesInjector } from 'src/app/shared/tokens/styles.token';
+import { UIComponent } from 'src/app/shared/models/component.model';
+import { AddComponent } from 'src/app/store/actions/actions';
 
 @Component({
   selector: 'app-viewport-section',
@@ -17,23 +21,22 @@ import { BaseUiComponent } from 'src/app/building-blocks/base-ui/base-ui.compone
 })
 export class ViewportSectionComponent implements OnInit {
 
-  components: ViewComponent[] = [];
-  id = 0;
-  generalStyles$: Observable<GeneralStyles>;
+  components: any[] = [];
+  id = 6;
+  generalStyles$ = this.store.select(getGeneralStyles);
 
-  input(ref: CdkPortalOutletAttachedRef): void {
-    ref = ref as ComponentRef<BaseUiComponent>;
-    ref.instance.isTemplate = false;
-    ref.instance.index = this.id;
-  }
-
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private stylesTokenService: StylesTokenService) { }
 
   ngOnInit(): void {
-    this.generalStyles$ = this.store.select(getGeneralStyles);
   }
 
-  drop(event: CdkDragDrop<ViewComponent[]>): void {
+  getInjectorById(id: number): Observable<StylesInjector> {
+    return this.stylesTokenService.getInjectorById(id);
+  }
+
+  drop(event: CdkDragDrop<any[]>): void {
+    console.log(event.previousContainer.data[event.previousIndex]);
+    this.store.dispatch(new AddComponent({...event.previousContainer.data[event.previousIndex], id: this.id++}));
     if (event.container.id === event.previousContainer.id) {
       if (!event.isPointerOverContainer) {
         this.components.splice(event.previousIndex, 1);
@@ -41,12 +44,14 @@ export class ViewportSectionComponent implements OnInit {
       }
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      //this.store.dispatch(new AddComponent(event.container.data));
       copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      this.components[event.currentIndex] = { ...this.components[event.currentIndex], id: ++this.id };
+      //this.components[event.currentIndex] = { ...this.components[event.currentIndex], id: ++this.id };
     }
   }
+
 
 }
