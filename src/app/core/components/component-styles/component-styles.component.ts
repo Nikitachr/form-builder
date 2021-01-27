@@ -25,15 +25,15 @@ export class ComponentStylesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.form?.patchValue(this.component?.styles);
-    this.form?.valueChanges.subscribe(() => this.updateStyles());
+    this.form.patchValue(this.component?.styles);
+    this.form.valueChanges.subscribe(() => this.updateStyles());
   }
 
   updateStyles(): void {
     if (this.form?.invalid) {
       return;
     }
-    this.store.dispatch(new UpdateComponent({ ...this.component, styles: this.form?.value }));
+    this.store.dispatch(new UpdateComponent({ ...this.component, styles: this.form.value }));
   }
 
   colorChange(color: string, field: string): void {

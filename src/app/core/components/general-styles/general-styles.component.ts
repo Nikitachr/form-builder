@@ -36,14 +36,14 @@ export class GeneralStylesComponent implements OnInit {
   }
 
   updateStyles(): void {
-    if (this.form?.invalid) {
+    if (this.form.invalid) {
       return;
     }
-    this.store.dispatch(new UpdateGeneralStyles(this.form?.value));
+    this.store.dispatch(new UpdateGeneralStyles(this.form.value));
   }
 
   colorChange(color: string): void {
-    this.form?.get('backgroundColor')?.setValue(color);
+    this.form.get('backgroundColor')?.setValue(color);
   }
 
 }
