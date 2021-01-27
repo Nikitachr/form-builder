@@ -45,19 +45,21 @@ body {
   cursor: pointer;
 }
 
-.cdk-drag-placeholder {
-
+textarea {
+  resize: vertical;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.Left {
+.left {
   margin-right: auto;
 }
 
-.Right {
+.right {
   margin-left: auto;
 }
 
-.Center {
+.center {
   margin-left: auto;
   margin-right: auto;
 }

@@ -15,7 +15,8 @@ import { UpdateGeneralStyles } from 'src/app/core/store/actions/actions';
 export class GeneralStylesComponent implements OnInit {
 
   generalStyles$ = this.store.select(getGeneralStyles).pipe(first());
-
+  value: string;
+  blob: Blob;
   form: FormGroup;
 
   constructor(private store: Store<AppState>) { }
@@ -44,6 +45,18 @@ export class GeneralStylesComponent implements OnInit {
 
   colorChange(color: string): void {
     this.form.get('backgroundColor')?.setValue(color);
+  }
+
+  update(): void {
+    document.body.getElementsByTagName('link')[0]?.remove();
+
+    this.blob = new Blob([this.value], {type: 'text/css'});
+    const link = document.createElement('link');
+
+    link.rel = 'stylesheet';
+    link.href = URL.createObjectURL(this.blob);
+
+    document.body.appendChild(link);
   }
 
 }

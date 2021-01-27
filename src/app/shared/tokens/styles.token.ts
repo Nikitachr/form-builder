@@ -1,5 +1,5 @@
 import { InjectionToken, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { ComponentStylesModel } from 'src/app/shared/models/component-styles.model';
 
@@ -8,6 +8,6 @@ export interface StylesInjector {
   id: number;
 }
 
-export const STYLES = new InjectionToken<Observable<ComponentStylesModel>>(
+export const STYLES = new InjectionToken<Subject<ComponentStylesModel>>(
   'Styles stream',
 );

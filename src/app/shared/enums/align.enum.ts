@@ -1,5 +1,5 @@
 export enum EAlignType {
-  Left = 'Left',
-  Right = 'Right',
-  Center = 'Center'
+  Left = 'left',
+  Right = 'right',
+  Center = 'center'
 }
