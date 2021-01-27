@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 
-import { ComponentStylesModel } from 'src/app/shared/models/component-styles.model';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
 import { User } from 'src/app/shared/models/user.model';
@@ -10,18 +9,11 @@ export enum ActionTypes {
   LoginSuccess = '[Components] Login success',
   Registration = '[Components] Registration ',
   RegistrationSuccess = '[Components] Registration success',
-  LoadComponents = '[Components] Load components',
   UpdateComponent = '[Components] Update component',
   AddComponent = '[Components] Add component',
   DeleteComponent = '[Components] Delete component',
   SelectComponent = '[Components] Select component',
   UpdateGeneralStyles = '[Component] Update general styles',
-}
-
-export class LoadComponents implements Action {
-  readonly type = ActionTypes.LoadComponents;
-  constructor(public payload: UIComponent[]) {
-  }
 }
 
 export class UpdateComponent implements Action {
@@ -85,7 +77,6 @@ export type Actions =
   | LoginSuccessAction
   | RegistrationAction
   | RegistrationSuccessAction
-  | LoadComponents
   | UpdateComponent
   | DeleteComponent
   | SelectComponentAction

@@ -2,33 +2,33 @@
   <div class="spacing-section">
     <p>Spacing</p>
 
-    <div *ngIf="component.styles.width" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.width !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Width</span>
       <input class="input m__left--auto" type="text" formControlName="width">
     </div>
 
-    <div *ngIf="component.styles.height" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.height !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Height</span>
       <input class="input m__left--auto" type="text" formControlName="height">
     </div>
 
-    <div *ngIf="component.styles.paddingTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.paddingTop !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Padding top and bottom</span>
       <input class="input m__left--auto" type="text" formControlName="paddingTop">
     </div>
 
-    <div *ngIf="component.styles.paddingLeft" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.paddingLeft !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Padding left and right</span>
       <input class="input m__left--auto" type="text" formControlName="paddingLeft">
     </div>
 
 
-    <div *ngIf="component.styles.marginTop" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.marginTop !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Margin top</span>
       <input class="input m__left--auto" type="text" formControlName="marginTop">
     </div>
 
-    <div *ngIf="component.styles.align" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.align !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Align</span>
       <div class="d__flex m__left--auto">
         <button (click)="alignChange(AlignType.Left)">Left</button>
@@ -42,47 +42,47 @@
   <div class="m__top--20 text-section">
     <p>Text</p>
 
-    <div *ngIf="component.styles.placeholder" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.placeholder !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Placeholder</span>
       <input class="input m__left--auto" type="text" formControlName="placeholder">
     </div>
 
-    <div *ngIf="component.styles.fontSize" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.fontSize !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Font size</span>
       <input class="input m__left--auto" type="text" formControlName="fontSize">
     </div>
 
-    <div *ngIf="component.styles.fontWeight" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.fontWeight !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Font weight</span>
       <input class="input m__left--auto" type="text" formControlName="fontWeight">
     </div>
 
-    <div *ngIf="component.styles.Color" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.Color !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Color</span>
       <input class="color m__left--auto" [colorPicker]="form.get('Color').value" [style.background]="form.get('Color').value" (colorPickerChange)="colorChange($event, 'Color')">
     </div>
 
   </div>
 
-  <div *ngIf="component.styles.borderColor" class="m__top--20 border-section">
+  <div *ngIf="component.styles.borderColor !== undefined" class="m__top--20 border-section">
     <p>Border</p>
 
-    <div *ngIf="component.styles.bgColor" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.bgColor !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Background color</span>
       <input class="color m__left--auto" [colorPicker]="form.get('bgColor').value" [style.background]="form.get('bgColor').value" (colorPickerChange)="colorChange($event, 'bgColor')">
     </div>
 
-    <div *ngIf="component.styles.borderRadius" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.borderRadius !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Border radius</span>
       <input class="input m__left--auto" type="text" formControlName="borderRadius">
     </div>
 
-    <div *ngIf="component.styles.borderWidth" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.borderWidth !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Border width</span>
       <input class="input m__left--auto" type="text" formControlName="borderWidth">
     </div>
 
-    <div *ngIf="component.styles.borderColor" class="m__left--10 d__flex d__flex--items-center m__top--10">
+    <div *ngIf="component.styles.borderColor !== undefined" class="m__left--10 d__flex d__flex--items-center m__top--10">
       <span class="m__right--10">Border color</span>
       <input class="color m__left--auto" [colorPicker]="form.get('borderColor').value" [style.background]="form.get('borderColor').value" (colorPickerChange)="colorChange($event, 'borderColor')">
     </div>
