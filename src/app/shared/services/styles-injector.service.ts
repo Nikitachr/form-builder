@@ -1,25 +1,21 @@
-import { Store } from '@ngrx/store';
-import { AppState, getComponents } from 'src/app/store/reducers';
 import { Observable } from 'rxjs';
-import { ComponentStylesModel } from 'src/app/shared/models/component-styles.model';
 import { map } from 'rxjs/operators';
-import { UIComponent } from 'src/app/shared/models/component.model';
 import { Injectable, Injector } from '@angular/core';
+
+import { UIComponent } from 'src/app/shared/models/component.model';
 import { STYLES, StylesInjector } from 'src/app/shared/tokens/styles.token';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StylesTokenService {
+export class StylesInjectorService {
 
-  components$ = this.store.select(getComponents);
+  constructor(private injector: Injector) {
 
-  constructor(public store: Store<AppState>, private injector: Injector) {
-    console.log('construct');
   }
 
-  getInjectors(): Observable<StylesInjector[]> {
-    return this.components$.pipe(
+  getInjectors(components$: Observable<UIComponent[]>): Observable<StylesInjector[]> {
+    return components$.pipe(
       map(components => components.map(
         (component: UIComponent) => ({
           injector: Injector.create({
@@ -33,8 +29,8 @@ export class StylesTokenService {
     );
   }
 
-  getInjectorById(id: number): Observable<StylesInjector> {
-    return this.getInjectors().pipe(
+  getInjectorById(components$: Observable<UIComponent[]>, id: number): Observable<StylesInjector> {
+    return this.getInjectors(components$).pipe(
       map(injectors => injectors.filter(injector => injector.id === id)[0])
     );
   }

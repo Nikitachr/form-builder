@@ -7,10 +7,9 @@ export interface ComponentStylesModel {
   paddingLeft?: number;
   paddingTop?: number;
   marginTop?: number;
-  required?: boolean;
   fontSize?: number;
   fontWeight?: number;
-  color?: string;
+  Color?: string;
   bgColor?: string;
   borderRadius?: number;
   borderWidth?: number;

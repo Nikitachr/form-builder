@@ -1,7 +1,7 @@
 import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
-import { Actions, ActionTypes } from 'src/app/store/actions/actions';
+import { Actions, ActionTypes } from 'src/app/core/store/actions/actions';
 import { EComponentType } from 'src/app/shared/enums/component-type.enum';
 import { GeneralStyles } from 'src/app/shared/models/general-styles.model';
 import { UIComponent } from 'src/app/shared/models/component.model';
@@ -23,6 +23,7 @@ import { ComponentStylesModel } from 'src/app/shared/models/component-styles.mod
 
 export interface ComponentState {
   components: UIComponent[];
+  viewportComponents: UIComponent[];
   selectedComponent: number | null;
   generalStyles: GeneralStyles;
 }
@@ -72,6 +73,7 @@ const initialState: ComponentState = {
       component: { ...TextareaComponent }
     }
   ],
+  viewportComponents: [],
   selectedComponent: null,
   generalStyles: {
     margins: 10,
@@ -88,19 +90,15 @@ export interface AppState {
 export function componentsReducer(state: ComponentState = initialState, action: Actions): ComponentState {
   switch (action.type) {
     case ActionTypes.UpdateComponent:
-      const newArr = [...state.components];
-      const index = state.components.findIndex(el => el.id === action.payload.id);
+      const newArr = [...state.viewportComponents];
+      const index = state.viewportComponents.findIndex(el => el.id === action.payload.id);
       newArr.splice(index, 1, action.payload);
       return {
-        ...state, components: newArr
-      };
-    case ActionTypes.LoadComponents:
-      return {
-        ...state, components: action.payload
+        ...state, viewportComponents: newArr
       };
     case ActionTypes.AddComponent:
       return  {
-        ...state, components: [...state.components, action.payload], selectedComponent: action.payload.id
+        ...state, viewportComponents: [...state.viewportComponents, action.payload], selectedComponent: action.payload.id
       };
     case ActionTypes.UpdateGeneralStyles:
       return  {
@@ -112,7 +110,7 @@ export function componentsReducer(state: ComponentState = initialState, action: 
       };
     case ActionTypes.DeleteComponent:
       return {
-        ...state, components: state.components.filter(el => el.id !== action.payload)
+        ...state, viewportComponents: state.viewportComponents.filter(el => el.id !== action.payload)
       };
     default:
       return state;
@@ -123,7 +121,9 @@ export const reducers: ActionReducerMap<AppState> = {
   componentsState: componentsReducer
 };
 
+export const getViewportComponents = (state: AppState) => state.componentsState.viewportComponents;
 export const getComponents = (state: AppState) => state.componentsState.components;
 export const getGeneralStyles = (state: AppState) => state.componentsState.generalStyles;
+export const getSelectedComponent = (state: AppState) => state.componentsState.selectedComponent;
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
-import { AppState, getGeneralStyles } from 'src/app/store/reducers';
-import { UpdateGeneralStyles } from 'src/app/store/actions/actions';
-import {first} from 'rxjs/operators';
+import { AppState, getGeneralStyles } from 'src/app/core/store/reducers';
+import { UpdateGeneralStyles } from 'src/app/core/store/actions/actions';
 
 @Component({
   selector: 'app-general-styles',
@@ -15,7 +14,7 @@ import {first} from 'rxjs/operators';
 })
 export class GeneralStylesComponent implements OnInit {
 
-  generalStyles$ = this.store.select(getGeneralStyles);
+  generalStyles$ = this.store.select(getGeneralStyles).pipe(first());
 
   form: FormGroup;
 

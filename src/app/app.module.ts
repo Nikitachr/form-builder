@@ -24,16 +24,15 @@ import { StylesSectionComponent } from 'src/app/form-builder/styles-section/styl
 import { ViewportSectionComponent } from 'src/app/form-builder/viewport-section/viewport-section.component';
 import { TemplatesSectionComponent } from 'src/app/form-builder/templates-section/templates-section.component';
 import { environment } from 'src/environments/environment';
-import { metaReducers, reducers } from 'src/app/store/reducers';
+import { metaReducers, reducers } from 'src/app/core/store/reducers';
 import { GeneralStylesComponent } from 'src/app/core/components/general-styles/general-styles.component';
 import { ComponentStylesComponent } from 'src/app/core/components/component-styles/component-styles.component';
 import { LabelComponent } from 'src/app/building-blocks/label/label.component';
 import { RequestInterceptor } from 'src/app/shared/interceptors/http.inteceptor';
 import { FormBuilderComponent } from 'src/app/form-builder/form-builder.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { Effects } from 'src/app/store/effects/effect';
+import { Effects } from 'src/app/core/store/effects/effect';
 import { STYLES } from 'src/app/shared/tokens/styles.token';
-import { StylesTokenService } from 'src/app/shared/services/styles-token.service';
 
 
 
@@ -61,14 +60,11 @@ import { StylesTokenService } from 'src/app/shared/services/styles-token.service
     AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule,
-    PortalModule,
-    StoreModule.forRoot(reducers, {metaReducers, runtimeChecks: {
+    StoreModule.forRoot(reducers, { metaReducers, runtimeChecks: {
         strictStateImmutability: false
       }}),
     EffectsModule.forRoot([Effects]),
-    MatButtonModule,
     MatExpansionModule,
-    MatTreeModule,
     HttpClientModule,
     ColorPickerModule,
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),

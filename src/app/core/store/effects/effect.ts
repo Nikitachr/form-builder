@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as clientActions from 'src/app/store/actions/actions';
+import * as clientActions from 'src/app/core/store/actions/actions';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthResponseModel } from 'src/app/shared/models/auth-response.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
