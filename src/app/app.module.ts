@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from 'src/app/app.component';
 import { StylesSectionComponent } from 'src/app/form-builder/styles-section/styles-section.component';
@@ -39,6 +40,7 @@ import { BuildingBlocksModule } from 'src/app/building-blocks/building-blocks.mo
     ReactiveComponentModule,
     AppRoutingModule,
     DragDropModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers, runtimeChecks: {
         strictStateImmutability: false

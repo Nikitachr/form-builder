@@ -7,7 +7,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ComponentStylesComponent } from 'src/app/core/components/component-styles/component-styles.component';
 import { GeneralStylesComponent } from 'src/app/core/components/general-styles/general-styles.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -22,8 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
-    ColorPickerModule,
-    MatExpansionModule
+    ColorPickerModule
   ],
   exports: [
     ComponentStylesComponent,
