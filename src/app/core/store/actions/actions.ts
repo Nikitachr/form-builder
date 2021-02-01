@@ -16,7 +16,7 @@ export enum ActionTypes {
   UpdateGeneralStyles = '[Component] Update general styles',
 }
 
-export class UpdateComponent implements Action {
+export class UpdateComponentAction implements Action {
   readonly type = ActionTypes.UpdateComponent;
   constructor(public payload: UIComponent) {
   }
@@ -24,13 +24,13 @@ export class UpdateComponent implements Action {
 
 
 
-export class AddComponent implements Action {
+export class AddComponentAction implements Action {
   readonly type = ActionTypes.AddComponent;
   constructor(public payload: UIComponent) {
   }
 }
 
-export class DeleteComponent implements Action {
+export class DeleteComponentAction implements Action {
   readonly type = ActionTypes.DeleteComponent;
   constructor(public payload: number) {
   }
@@ -66,7 +66,7 @@ export class RegistrationSuccessAction implements Action {
   }
 }
 
-export class UpdateGeneralStyles implements Action {
+export class UpdateGeneralStylesAction implements Action {
   readonly type = ActionTypes.UpdateGeneralStyles;
   constructor(public payload: GeneralStyles) {
   }
@@ -77,8 +77,8 @@ export type Actions =
   | LoginSuccessAction
   | RegistrationAction
   | RegistrationSuccessAction
-  | UpdateComponent
-  | DeleteComponent
+  | UpdateComponentAction
+  | DeleteComponentAction
   | SelectComponentAction
-  | UpdateGeneralStyles
-  | AddComponent;
+  | UpdateGeneralStylesAction
+  | AddComponentAction;

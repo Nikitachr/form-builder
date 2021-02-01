@@ -6,7 +6,7 @@ import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-d
 import { AppState, getGeneralStyles, getViewportComponents } from 'src/app/core/store/reducers';
 import { StylesInjectorService } from 'src/app/shared/services/styles-injector.service';
 import { StylesInjector } from 'src/app/shared/tokens/styles.token';
-import { AddComponent, DeleteComponent, SelectComponentAction } from 'src/app/core/store/actions/actions';
+import { AddComponentAction, DeleteComponentAction, SelectComponentAction } from 'src/app/core/store/actions/actions';
 import { UIComponent } from 'src/app/shared/models/component.model';
 
 @Component({
@@ -31,13 +31,13 @@ export class ViewportSectionComponent {
   drop(event: CdkDragDrop<UIComponent[]>): void {
     if (event.container.id === event.previousContainer.id) {
       if (!event.isPointerOverContainer) {
-        this.store.dispatch(new DeleteComponent(this.components[event.previousIndex].id));
+        this.store.dispatch(new DeleteComponentAction(this.components[event.previousIndex].id));
         this.components.splice(event.previousIndex, 1);
         return;
       }
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      this.store.dispatch(new AddComponent({...event.previousContainer.data[event.previousIndex], id: ++this.id}));
+      this.store.dispatch(new AddComponentAction({...event.previousContainer.data[event.previousIndex], id: ++this.id}));
       copyArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.components[event.currentIndex] = { ...this.components[event.currentIndex], id: this.id };
     }

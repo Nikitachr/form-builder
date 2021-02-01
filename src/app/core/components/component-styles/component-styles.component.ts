@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { UpdateComponent } from 'src/app/core/store/actions/actions';
+import { UpdateComponentAction } from 'src/app/core/store/actions/actions';
 import { AppState } from 'src/app/core/store/reducers';
 import { UIComponent } from 'src/app/shared/models/component.model';
 import { EAlignType } from 'src/app/shared/enums/align.enum';
@@ -33,7 +33,7 @@ export class ComponentStylesComponent implements OnInit {
     if (this.form?.invalid) {
       return;
     }
-    this.store.dispatch(new UpdateComponent({ ...this.component, styles: this.form.value }));
+    this.store.dispatch(new UpdateComponentAction({ ...this.component, styles: this.form.value }));
   }
 
   colorChange(color: string, field: string): void {

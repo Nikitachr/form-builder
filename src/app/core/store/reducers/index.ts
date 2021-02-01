@@ -1,4 +1,4 @@
-import { ActionReducerMap, createSelector, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
 import { Actions, ActionTypes } from 'src/app/core/store/actions/actions';
@@ -26,6 +26,7 @@ export interface ComponentState {
   viewportComponents: UIComponent[];
   selectedComponent: number | null;
   generalStyles: GeneralStyles;
+  user: string;
 }
 
 const initialState: ComponentState = {
@@ -80,7 +81,8 @@ const initialState: ComponentState = {
     paddingTop: 20,
     paddingLeft: 20,
     backgroundColor: '#fff'
-  }
+  },
+  user: null
 };
 
 export interface AppState {
@@ -111,6 +113,11 @@ export function componentsReducer(state: ComponentState = initialState, action: 
     case ActionTypes.DeleteComponent:
       return {
         ...state, viewportComponents: state.viewportComponents.filter(el => el.id !== action.payload)
+      };
+    case ActionTypes.RegistrationSuccess:
+    case ActionTypes.LoginSuccess:
+      return {
+        ...state, user: action.payload
       };
     default:
       return state;

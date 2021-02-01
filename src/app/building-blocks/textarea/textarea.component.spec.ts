@@ -1,43 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
 
-import { EComponentType } from 'src/app/shared/enums/component-type.enum';
-import { ValidatorService } from 'src/app/shared/services/validator.service';
-import Spy = jasmine.Spy;
 import { TextareaComponent } from 'src/app/building-blocks/textarea/textarea.component';
+import { STYLES } from 'src/app/shared/tokens/styles.token';
 
 describe('Test Textarea Component', () => {
   let component: TextareaComponent;
   let fixture: ComponentFixture<TextareaComponent>;
 
-  const testStore = {
-    dispatch: jasmine.createSpy('dispatch'),
-    select: jasmine.createSpy('select').and.returnValue(of({ styles: {
-        placeholder: 'Text area',
-        width: 300,
-        height: 100,
-        paddingTop: 10,
-        paddingLeft: 10,
-        marginTop: 5,
-        required: true,
-        fontSize: 18,
-        fontWeight: 400,
-        color: '#000',
-        bgColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#000'
-      }}))
-  };
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TextareaComponent ],
-      providers: [
-        { provide: Store, useValue: testStore },
-        ValidatorService
-      ]
+      providers: [{ provide: STYLES, useValue: { placeholder: 'test' } }]
     })
       .compileComponents();
     fixture = TestBed.createComponent(TextareaComponent);
@@ -48,26 +21,8 @@ describe('Test Textarea Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not create ui component if template', () => {
-    component.isTemplate = true;
-    fixture.detectChanges();
-    component.componentInit();
-    expect(component.name).toBeUndefined();
-  });
-
-  it('should create ui component if not template', () => {
-    component.isTemplate = false;
-    fixture.detectChanges();
-    component.componentInit();
-    expect(component.name).toBeTruthy();
-  });
-
   it('should have default styles', () => {
     expect(component.styles).toBeTruthy();
-  });
-
-  it('component type should be a textarea', () => {
-    expect(component.ComponentType).toEqual(EComponentType.Textarea);
   });
 
   it('should render placeholder', () => {

@@ -16,11 +16,14 @@
     <input class="input m__left--auto" type="text" formControlName="margins">
   </div>
 
+  <div class="m__top--40">
+    <span>Inline styles</span>
+    <textarea formControlName="blob" class="m__top--10 w__100per"></textarea>
+  </div>
+
 </div>
 
-<div class="m__top--40">
-  <span>Inline styles</span>
-  <textarea [(ngModel)]="value" (ngModelChange)="update()" class="m__top--10 w__100per"></textarea>
-</div>
+
+<link rel="stylesheet" [href]="customPopupStyles$ | ngrxPush | safe">
 
 
